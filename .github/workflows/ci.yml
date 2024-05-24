@@ -23,9 +23,8 @@ jobs:
 
     - name: Navigate to app directory
       run: |
-        cd my-app
-         ls
-
+       cd my-app
+       ls
     - name: Install dependencies
       run: npm install
 
