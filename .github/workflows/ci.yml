@@ -26,17 +26,16 @@ jobs:
        cd my-app
        ls
     - name: Install dependencies
-      run: npm install
+      run: |
+       cd my-app && npm install
 
     - name: Build the project
       run: npm run build
 
-    - name: Ensure the server starts
-      env:
-        PORT: 3000
+    - name: Start the server
       run: |
-        npm start &
+        cd my-app && npm start &
         # Delay for 10 seconds to allow the server to start
         sleep 10
-        
+        # Check if the server is up
         curl -I http://localhost:3000
