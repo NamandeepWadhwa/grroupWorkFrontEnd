@@ -19,7 +19,7 @@ jobs:
     - name: Setup Node.js environment
       uses: actions/setup-node@v3
       with:
-        node-version: '16' # Specify the Node.js version you are using
+        node-version: '20' # Specify the Node.js version you are using
 
     - name: Navigate to app directory
       run: |
