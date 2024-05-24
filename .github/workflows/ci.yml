@@ -21,6 +21,9 @@ jobs:
       with:
         node-version: '16' # Specify the Node.js version you are using
 
+    - name: Navigate to app directory
+      run: cd my-app
+
     - name: Install dependencies
       run: npm install
 
@@ -32,8 +35,7 @@ jobs:
         PORT: 3000
       run: |
         npm start &
-        for i in {1..10}; do
-          curl -I http://localhost:3000 && break
-          echo "Waiting for the server to start..."
-          sleep 1
-        done
+        # Delay for 10 seconds to allow the server to start
+        sleep 10
+        # Check if the server is up
+        curl -I http://localhost:3000
