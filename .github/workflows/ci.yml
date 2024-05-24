@@ -22,7 +22,9 @@ jobs:
         node-version: '16' # Specify the Node.js version you are using
 
     - name: Navigate to app directory
-      run: cd my-app
+      run: |
+        cd my-app
+         ls
 
     - name: Install dependencies
       run: npm install
