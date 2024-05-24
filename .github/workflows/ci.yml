@@ -1,0 +1,42 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20' # Specify the Node.js version you are using
+
+    - name: Navigate to app directory
+      run: |
+       cd my-app
+       ls
+    - name: Install dependencies
+      run: |
+       cd my-app && npm install
+
+    - name: Build the project
+      run: |
+        cd my-app && npm run build
+
+    - name: Start the server
+      run: |
+        cd my-app && npm start &
+        # Delay for 10 seconds to allow the server to start
+        sleep 10
+        # Check if the server is up
+        curl -I http://localhost:3000
