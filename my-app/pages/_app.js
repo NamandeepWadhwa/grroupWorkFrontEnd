@@ -5,9 +5,13 @@ import { Container } from "react-bootstrap";
 import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }) {
-  
-    <Component {...pageProps} />
-
-  return<RouteGuard><Container><Layout><Component {...pageProps} /></Layout></Container></RouteGuard>;
-  
+  return (
+    <RouteGuard>
+      <Container>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Container>
+    </RouteGuard>
+  );
 }
