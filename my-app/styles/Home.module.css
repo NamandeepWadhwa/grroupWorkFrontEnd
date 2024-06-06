@@ -27,18 +27,18 @@
   width: 100%;
 }
 
-.nav ul {
+.navul {
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
 }
 
-.nav ul li {
+.navli {
   width: 100%;
 }
 
-.nav ul li a {
+.navli {
   text-decoration: none;
   color: #fff;
   font-size: 1.2rem;
@@ -49,7 +49,7 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.nav ul li a:hover {
+.navli:hover {
   background-color: #fff;
   color: #AB171C;
 }
@@ -110,4 +110,171 @@
   padding: 1rem;
   background-color: #AB171C;
   color: #fff;
+}
+
+.backBtn {
+  color: black;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+.backBtn:hover {
+  background-color: #dcdcdc;
+  border-color: darkgray;
+  color: black;
+}
+
+.postBtn {
+  color: black;
+  margin-top: 0;
+  background-color: #f0f0f0;
+  border: 2px solid gray;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.postBtn:hover {
+  background-color: #dcdcdc;
+  border-color: darkgray;
+  color: black;
+}
+
+.btnContainer {
+  width: 90%;
+  min-width: 450px;
+}
+
+.freeboard {
+  border: 2px solid gray;
+  border-radius: 15px;
+  padding: 10px 20px 15px 20px;
+  display: flex;
+  margin-left: 20px;
+  margin-top: 40px;
+  flex-direction: column;
+  width: 60%;
+  position: fixed;
+  box-sizing: border-box;
+  height: 70%;
+  min-height: 600px;
+}
+
+@media (max-width: 800px) {
+  .freeboard {
+    width: 60%;
+    box-sizing: border-box;  
+  }
+}
+
+.postCard {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 50px;
+}
+
+.cardImg {
+  width: 100px;
+  height: 64px;
+}
+
+.dropdown {
+  margin-right: 20px;
+}
+
+.dropdownMenu {
+  color: black;
+  background-color: white;
+  border-color: darkgray;
+}
+
+.dropdownMenu:hover {
+  background-color: gray;
+  border-color: darkgray;
+}
+
+.postImage {
+  margin-top: 20px;
+}
+
+.image {
+  height: 60%;
+  width: 95%;
+}
+
+.image img {
+  margin-top: 10px;
+  height: 320px;
+  width: 400px;
+}
+
+.cancelBtn {
+  margin-left: 20px;
+  background-color: #AB171C;;
+  color: white;
+  border-color: #AB171C;
+}
+
+.cancelBtn:hover {
+  background-color:gray;
+  border-color: darkgray;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.postTitle {
+  margin-top: 20px;
+}
+
+.postContent {
+  margin-top: 20px;
+  height: 70%;
+}
+
+.content {
+  margin-top: 20px;  
+  height: 35vh;
+}
+
+.createPost {
+  height: 100%;
+}
+
+.postSection {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+
+.post {
+  margin-top: 10px;
+  margin-bottom: 1.8rem; 
+  width: 100%;
+}
+
+.texts {
+  text-decoration:none;
+  color: inherit;
+}
+
+.postHeader {
+  width:83%;
+}
+
+.postImageCard {
+  margin-right: 50px;
+}
+
+.postImageCard img {
+  width: 120;
+  height: 80px;
+  object-fit: cover;
 }
