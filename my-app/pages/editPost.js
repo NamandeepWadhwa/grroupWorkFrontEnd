@@ -31,7 +31,7 @@ export default function EditPost() {
     data.set('content', content);
     data.set('id', id);
     if (files?.[0]) {
-      data.set('file', files?.[0]);
+      data.append('file', files?.[0]);
     }
     const response = await fetch('http://localhost:8080/post', {
       method: 'PUT',
@@ -83,7 +83,7 @@ export default function EditPost() {
         <Editor onChange={setContent} value={content} />
       </div>
       <div className="d-flex flex-row-reverse mx-3">
-      <Button className={styles.postBtn}>Update post</Button>
+      <Button type="submit" className={styles.postBtn}>Update post</Button>
       <div className="mx-3"><Button type="button" className={styles.cancelBtn} onClick={handleCancel}>Cancel</Button></div>
       </div>
     </form>
