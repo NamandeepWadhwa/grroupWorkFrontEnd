@@ -33,7 +33,7 @@ const Freeboard = () => {
     formData.set('file', files[0]);
     event.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/post', formData);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/post`, formData);
       if (res.status === 200) {
         setRedirect(true);
       }
