@@ -6,6 +6,7 @@ import {Outlet} from "react-router-dom";
 import Freeboard from '../pages/freeboard';
 import styles from "@/styles/Home.module.css";
 
+
 const Layout = () => {
     const [activeSection, setActiveSection] = useState('home');
 
