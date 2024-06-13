@@ -3,7 +3,6 @@ import {Link} from "react-router-dom";
 import styles from "@/styles/Home.module.css";
 
 export default function Post({_id,title,content,image,createdAt}) {
-
   return (
     <div className={styles.post}>
         <div className="d-flex post">
