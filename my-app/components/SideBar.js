@@ -5,8 +5,11 @@ import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '@/styles/Home.module.css';
 import { removingUser } from '@/lib/removingUser';
+import { useRouter } from 'next/router';
 
 const SideBar = ({ setActiveSection }) => {
+    const router = useRouter();
+    const noSideBarPaths = ['/user/login'];
 
     const handleSignOut = () => {
         if (window.confirm("Are you sure you want to sign out?")) {
@@ -29,6 +32,7 @@ const SideBar = ({ setActiveSection }) => {
                         />
                     </Link>
                 </div>
+                {!noSideBarPaths.includes(router.pathname) && (
                 <Container>
                     <Nav className={styles.nav}>
                         <div className={styles.navul}>
@@ -43,6 +47,7 @@ const SideBar = ({ setActiveSection }) => {
                         Sign Out
                     </button>
                 </Container>
+                )}
             </header>
         </>
     );
