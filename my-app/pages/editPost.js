@@ -15,7 +15,7 @@ export default function EditPost() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/post/'+id)
+    fetch(process.env.NEXT_PUBLIC_BACKENDURL + '/post/'+id)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -33,7 +33,7 @@ export default function EditPost() {
     if (files?.[0]) {
       data.append('file', files?.[0]);
     }
-    const response = await fetch('http://localhost:8080/post', {
+    const response = await fetch(process.env.NEXT_PUBLIC_BACKENDURL + '/post', {
       method: 'PUT',
       body: data,
     });
