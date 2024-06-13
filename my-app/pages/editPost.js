@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 import styles from '@/styles/Home.module.css';
 import Editor from './editor';
 
+
 export default function EditPost() {
   const { id } = useParams();
   const [title, setTitle] = useState('');
