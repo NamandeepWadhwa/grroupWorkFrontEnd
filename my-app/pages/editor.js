@@ -1,11 +1,15 @@
-import ReactQuill from "react-quill";
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import styles from "@/styles/Home.module.css";
+import ReactQuill from 'react-quill';
 
-const QuillEditor = dynamic(() => import('react-quill'), { ssr: false });
+export default function Editor({ value, onChange }) {
+  const [isClient, setIsClient] = useState(false);
 
-export default function Editor({value,onChange}) {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const modules = {
     toolbar: [
       [{ header: [1, 2, false] }],
@@ -20,13 +24,20 @@ export default function Editor({value,onChange}) {
       ['clean'],
     ],
   };
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div className="content">
-    <ReactQuill className={styles.postContent}
-      value={value}
-      theme={'snow'}
-      onChange={onChange}
-      modules={modules} />
+      <ReactQuill
+        className={styles.postContent}
+        value={value}
+        theme={'snow'}
+        onChange={onChange}
+        modules={modules}
+      />
     </div>
   );
 }
