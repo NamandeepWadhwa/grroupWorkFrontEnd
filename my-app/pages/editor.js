@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import styles from "@/styles/Home.module.css";
-import ReactQuill from 'react-quill';
+
+// Conditionally import ReactQuill only on the client side
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 export default function Editor({ value, onChange }) {
   const [isClient, setIsClient] = useState(false);
