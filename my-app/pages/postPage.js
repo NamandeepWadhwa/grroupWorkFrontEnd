@@ -20,7 +20,6 @@ export default function PostPage() {
   const handleCancel = () => {
     navigate('/');
   };
-
   const handleEditClick = () => {
     navigate(`/edit/${id}`);
   };
