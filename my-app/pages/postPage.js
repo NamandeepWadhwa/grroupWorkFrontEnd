@@ -9,7 +9,7 @@ export default function PostPage() {
   const navigate = useNavigate();
   const {id} = useParams();
   useEffect(() => {
-    fetch(`http://localhost:8080/post/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/post/${id}`)
       .then(response => {
         response.json().then(postInfo => {
           setPostInfo(postInfo);
@@ -52,7 +52,7 @@ export default function PostPage() {
         </div>
         </div>
       <div className={styles.image}>
-        <img src={`http://localhost:8080/${postInfo.image}`} alt=""/>
+        <img src={`${process.env.NEXT_PUBLIC_BACKENDURL}/${postInfo.image}`} alt=""/>
       </div>
       <div className="content" dangerouslySetInnerHTML={{__html:postInfo.content}} />
     </div>
