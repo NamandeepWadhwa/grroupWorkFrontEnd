@@ -8,7 +8,7 @@ export default function Post({_id,title,content,image,createdAt}) {
         <div className="d-flex post">
         <div className={styles.postImageCard}>
             <Link to={`/post/${_id}`}>
-                <img src={'http://localhost:8080/'+image} alt=""/>
+                <img src={`${process.env.NEXT_PUBLIC_BACKENDURL}/image`} alt=""/>
             </Link>
         </div>
         <div>
