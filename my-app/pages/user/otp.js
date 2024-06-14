@@ -21,7 +21,7 @@ export default function BasicExample() {
   
     try {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@ssfinc\.ca$/i;
-      let role = "Stuent";
+      let role = "Student";
       if(emailRegex.test(email)){
           role = "SSF Staff";
       }
@@ -45,7 +45,7 @@ export default function BasicExample() {
       else{
         alert(data.error);
       }
-      console.log(data);
+      
     } catch (error) {
       console.error('An error occurred', error);
      alert("An error occurred Please try again");
