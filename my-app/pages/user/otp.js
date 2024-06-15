@@ -21,7 +21,7 @@ export default function BasicExample() {
   
     try {
       const emailRegex = /^[a-zA-Z0-9._%+-]+@ssfinc\.ca$/i;
-      let role = "Stuent";
+      let role = "Student";
       if(emailRegex.test(email)){
           role = "SSF Staff";
       }
@@ -38,8 +38,6 @@ export default function BasicExample() {
       const data = await response.json();
       if(response.status === 200){
         setToken(data.token);
-        setEmailLocal(email);
-        setRole(role);
         router.push('/');
       }
       else{
