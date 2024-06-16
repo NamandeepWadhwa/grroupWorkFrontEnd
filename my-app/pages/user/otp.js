@@ -45,7 +45,7 @@ export default function BasicExample() {
       else{
         alert(data.error);
       }
-      
+      console.log(data);
     } catch (error) {
       console.error('An error occurred', error);
      alert("An error occurred Please try again");
