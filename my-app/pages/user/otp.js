@@ -38,6 +38,8 @@ export default function BasicExample() {
       const data = await response.json();
       if(response.status === 200){
         setToken(data.token);
+        setEmailLocal(email);
+        setRole(role);
         router.push('/');
       }
       else{
