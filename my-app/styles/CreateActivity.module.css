@@ -1,0 +1,61 @@
+.createActivityContainer {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .createActivityForm {
+    margin-top: 20px;
+  }
+  
+  .createActivityForm label {
+    font-weight: bold;
+  }
+  
+  .createActivityForm input[type="text"],
+  .createActivityForm input[type="date"],
+  .createActivityForm input[type="url"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .createActivityForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .createActivityForm button {
+    margin-top: 10px;
+  }
+  
+  .createActivityForm .previewImage {
+    width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .backLink {
+    display: inline-block;
+    padding: 10px;
+    background-color: transparent;
+    color: #ab171c; 
+    text-decoration: none;
+  }
+  
+  .arrowIcon {
+    color: #ab171c;
+    font-size: 1.5rem;
+  }
+  
