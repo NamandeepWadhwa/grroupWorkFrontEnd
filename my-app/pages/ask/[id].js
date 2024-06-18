@@ -60,7 +60,7 @@ export default function Page() {
     <Container className={`${styles.scrollable} bg-white`}>
       <Row className="my-2">
         <Col>
-           <Link href="/questions"><Image src="/backArrowQuestions.png" width={50} height={50} alt="back arrow image "></Image></Link> 
+           <Link href="/ask"><Image src="/backArrowQuestions.png" width={50} height={50} alt="back arrow image "></Image></Link> 
         </Col>
       </Row>
         <Row className="my-3">

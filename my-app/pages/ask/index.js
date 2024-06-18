@@ -1,4 +1,3 @@
-import { Row, Col} from "react-bootstrap";
 import { useEffect, useState } from "react";
 import DisplayQuestion from "@/components/questiondispaly";
 import  styles from "@/styles/Question.module.css";
@@ -6,6 +5,7 @@ import QuestionNavbar from "@/components/questionNavbar";
 import { questionAtom } from "@/questinJoti/question";
 import { useAtom } from "jotai";
 import { gettingQuestions } from "@/lib/question/gettingQuestionNewest";
+import { Container } from "react-bootstrap";
 
 export default function Question() {
   const [questions, setQuestions] = useAtom(questionAtom);
@@ -35,13 +35,14 @@ export default function Question() {
       ) : (<>
       
       
-          <Row className={styles.scrollable}>
+          <Container className={styles.scrollable}>
             {questions.map((question) => (
-              <Col key={question._id} md={4} className="my-5">
+              
+                
                 <DisplayQuestion question={question} />
-              </Col>
+              
             ))}
-          </Row>
+          </Container>
         
       </>)}
     </>
