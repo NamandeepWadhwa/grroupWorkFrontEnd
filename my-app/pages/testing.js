@@ -16,8 +16,8 @@ export default function testing() {
       const res=await fetch(process.env.NEXT_PUBLIC_BACKENDURL+'/createQuestion',{
         method:'POST',
         headers:{
-          Authorization: `JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NmNjNzk2OTE3MGU0ODE3MTQzZmU5OCIsImVtYWlsIjoibndhZGh3YTJAbXlzZW5lY2EuY2EiLCJyb2xlIjoiU3R1ZGVudCIsImlhdCI6MTcxODQxOTU0Nn0.XtNhtp8-v5tzzzIr3uUHAN-0PKWNzX8rOYpAZrXlLeA`,
-          'Content-Type':'application/json',
+          Authorization: `JWT ${gettingUser().token}`,
+          'Content-Type': 'application/json',
           
         },
         body:JSON.stringify(sendingData)

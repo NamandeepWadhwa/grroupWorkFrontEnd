@@ -3,13 +3,13 @@ import { Container } from 'react-bootstrap';
 import styles from '@/styles/Home.module.css';
 import SideBar from './SideBar';
 
-const Layout = ({ children }) => {
+const Layout =(props) => {
 
     return (
         <div className={styles.container}>
             <SideBar />
             <Container className={styles.main}>
-                {children}
+                {props.children}
             </Container>
         </div>
     );
