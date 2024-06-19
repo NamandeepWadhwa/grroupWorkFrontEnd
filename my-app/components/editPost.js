@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Button } from 'react-bootstrap';
 import styles from '@/styles/Home.module.css';
 import dynamic from 'next/dynamic';
-
 const Editor = dynamic(() => import('../pages/editor'), { ssr: false });
 
 const EditPost = ({ postInfo }) => {
