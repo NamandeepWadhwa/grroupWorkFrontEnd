@@ -10,7 +10,6 @@ import styles1 from '@/styles/CreateActivity.module.css';
 
 const PostPage = ({ postInfo }) => {
   const router = useRouter();
-
   useEffect(() => {
     if (!postInfo) return;
 
