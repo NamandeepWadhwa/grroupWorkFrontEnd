@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import styles from "@/styles/Home.module.css";
-
 const Editor = dynamic(() => import('../pages/editor'), { ssr: false });
 
 const CreatePost = () => {
