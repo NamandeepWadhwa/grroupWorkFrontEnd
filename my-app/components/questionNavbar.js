@@ -58,8 +58,8 @@ export default function QuestionNavbar() {
 <Navbar.Toggle aria-controls="basic-navbar-nav" />
 <Navbar.Collapse id="basic-navbar-nav">
   <Nav className="me-auto">
-    <Nav.Link  className="m-2" href="#home">My question</Nav.Link>
-    <Nav.Link className="m-2" href="#link">My answers</Nav.Link>
+    <Nav.Link  className="m-2" href="/user/questions">My question</Nav.Link>
+    <Nav.Link className="m-2" href="/user/answers">My answers</Nav.Link>
     <NavDropdown title="Filter" className="mt-2" id="basic-nav-dropdown">
       <NavDropdown.Item  onClick={getQuestions} >Newest</NavDropdown.Item>
       <NavDropdown.Item  onClick={OldestiQuestions}>
