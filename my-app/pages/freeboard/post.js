@@ -23,5 +23,4 @@ const Post = ({ _id, title, image, createdAt }) => {
     </div>
   );
 };
-
 export default Post;
