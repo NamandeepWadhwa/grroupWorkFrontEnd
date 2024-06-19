@@ -1,37 +1,34 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { Button } from 'react-bootstrap';
 import styles from '@/styles/Home.module.css';
-import Editor from './editor';
+import dynamic from 'next/dynamic';
 
+const Editor = dynamic(() => import('../pages/editor'), { ssr: false });
 
-export default function EditPost() {
-  const { id } = useParams();
+const EditPost = ({ postInfo }) => {
+  const router = useRouter();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [files, setFiles] = useState('');
+  const [files, setFiles] = useState(null);
   const [redirect, setRedirect] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/post/${id}`)
-      .then(response => response.json())
-      .then(postInfo => {
-        setTitle(postInfo.title);
-        setContent(postInfo.content);
-      });
-  }, [id]);
+    if (postInfo) {
+      setTitle(postInfo.title || '');
+      setContent(postInfo.content || '');
+    }
+  }, [postInfo]);
 
   async function updatePost(ev) {
     ev.preventDefault();
     const data = new FormData();
     data.set('title', title);
     data.set('content', content);
-    data.set('id', id);
     if (files?.[0]) {
-      data.append('file', files?.[0]);
+      data.append('file', files[0]);
     }
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/post`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/freeboard/edit/${postInfo._id}`, {
       method: 'PUT',
       body: data,
     });
@@ -42,12 +39,12 @@ export default function EditPost() {
 
   useEffect(() => {
     if (redirect) {
-      navigate(`/post/${id}`);
+      router.push(`/freeboard/${postInfo._id}`);
     }
-  }, [redirect, navigate, id]);
+  }, [redirect, router, postInfo._id]);
 
   const handleCancel = () => {
-    navigate("/");
+    router.push("/freeboard");
   };
 
   return (
@@ -87,3 +84,5 @@ export default function EditPost() {
     </>
   );
 }
+
+export default EditPost;
