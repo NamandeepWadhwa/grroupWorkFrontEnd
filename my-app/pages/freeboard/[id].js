@@ -23,7 +23,6 @@ const PostPageDetail = () => {
         console.error('Error fetching post:', error);
       }
     };
-
     if (id) {
       fetchPostInfo();
     }
