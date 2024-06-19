@@ -7,7 +7,6 @@ import { Button } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from '@/styles/Home.module.css';
 import styles1 from '@/styles/CreateActivity.module.css';
-import Comments from '@/components/comments';
 
 const PostPage = ({ postInfo }) => {
   const router = useRouter();
@@ -64,9 +63,6 @@ const PostPage = ({ postInfo }) => {
             <img src={`${process.env.NEXT_PUBLIC_BACKENDURL}/${postInfo.image}`} alt=""/>
           </div>
           <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
-        </div>
-        <div className={styles.commentsSection}>
-          <Comments post={postInfo}/>
         </div>
       </div>
     </div>
