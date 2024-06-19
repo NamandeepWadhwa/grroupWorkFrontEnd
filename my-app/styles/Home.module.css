@@ -1,6 +1,7 @@
 .container {
   display: flex;
-  height: 100vh;
+  min-width: 800px;
+  min-height: 900px;
 }
 
 .header {
@@ -277,4 +278,18 @@
   width: 120;
   height: 80px;
   object-fit: cover;
+}
+
+.freeboardContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.commentsSection {
+  border: 2px solid gray;
+  border-radius: 15px;
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
 }
