@@ -38,13 +38,12 @@ const ActivityList = () => {
         {activities.map(activity => (
           <Col key={activity._id} className={styles.col}>
             <Card className={styles.card}>
-              <Card.Img variant="top" src={activity.image || '/default-image.jpg'} />
+              <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image}` || '/default-image.jpg'} />
               <Card.Body className={styles.cardBody}>
                 <Card.Title className={styles.cardTitle}>{activity.title}</Card.Title>
                 <Card.Text className={styles.cardText}>
                   {new Date(activity.date).toLocaleDateString()}<br />
                   Location: {activity.location}<br />
-                  <Link href={`/activities/${activity._id}`}>More Info</Link><br />
                   {activity.participants?.length || 0} people joined
                 </Card.Text>
                 <Button as={Link} href={`/activities/${activity._id}`} className="mt-2">View Details</Button>

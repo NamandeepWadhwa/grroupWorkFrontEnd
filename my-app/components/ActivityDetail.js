@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
+import Link from 'next/link';
 import styles from '@/styles/ActivityDetail.module.css';
 
-const ActivityDetail = () => {
-  const { id } = useParams();
+const ActivityDetail = ({ id }) => {
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter(); // Initialize useRouter for navigation
 
   useEffect(() => {
     const fetchActivity = async () => {
@@ -22,7 +22,9 @@ const ActivityDetail = () => {
       }
     };
 
-    fetchActivity();
+    if (id) {
+      fetchActivity();
+    }
   }, [id]);
 
   const handleJoinActivity = async () => {
@@ -34,8 +36,21 @@ const ActivityDetail = () => {
     }
   };
 
+  const handleDeleteActivity = async () => {
+    try {
+      await axios.delete(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
+      alert('Activity deleted successfully!');
+      // Redirect to activities list or another appropriate page after deletion
+      router.push('/activities');
+    } catch (error) {
+      console.error('Error deleting activity:', error);
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!activity) return <div>Activity not found</div>;
+
+  const participantsCount = activity.participants ? activity.participants.length : 0;
 
   return (
     <Container className={styles.container}>
@@ -47,11 +62,16 @@ const ActivityDetail = () => {
             Date: {new Date(activity.date).toLocaleDateString()}<br />
             Location: {activity.location}<br />
             <a href={activity.link} target="_blank" rel="noopener noreferrer">More Info</a><br />
-            {activity.participants.length} people joined
+            {participantsCount} people joined
           </Card.Text>
           <Button onClick={handleJoinActivity}>Join Activity</Button>
           {activity.isCreator && (
-            <Button variant="secondary" onClick={() => navigate(`/activities/edit/${activity._id}`)} className="ml-2">Edit Activity</Button>
+            <>
+              <Link href={`/activities/edit/${activity._id}`}>
+                <Button variant="secondary" className="ml-2">Edit Activity</Button>
+              </Link>
+              <Button variant="danger" className="ml-2" onClick={handleDeleteActivity}>Delete Activity</Button>
+            </>
           )}
         </Card.Body>
       </Card>

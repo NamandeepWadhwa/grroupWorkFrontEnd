@@ -54,9 +54,9 @@ const CreateActivity = () => {
   return (
     <Container className={styles.container}>
       <Link href="/activities" passHref>
-        <a className={styles.backLink}>
+        <Button variant="link" className={styles.backLink}>
           <FaArrowLeft className={styles.arrowIcon} /> Back to Activities
-        </a>
+        </Button>
       </Link>
       <h1>Create a New Activity</h1>
       <Card>
