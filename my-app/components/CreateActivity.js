@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import axios from 'axios';
 import styles from '@/styles/CreateActivity.module.css';
+import { gettingUser } from "../gettingUser";
 
 const CreateActivity = () => {
   const [newActivity, setNewActivity] = useState({
@@ -37,6 +38,7 @@ const CreateActivity = () => {
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities`, formData, {
         headers: {
+          Authorization: `JWT ${gettingUser().token}`,
           'Content-Type': 'multipart/form-data',
         },
       });
