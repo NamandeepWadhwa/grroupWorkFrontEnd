@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import styles from '@/styles/CreateActivity.module.css';
+import { gettingUser } from '../gettingUser';
 
 const CreateActivity = () => {
   const [newActivity, setNewActivity] = useState({
@@ -38,6 +39,7 @@ const CreateActivity = () => {
         method: 'POST',
         body: formData,
         headers: {
+          Authorization: `JWT ${gettingUser().token}`,
         },
       });
       
@@ -48,6 +50,7 @@ const CreateActivity = () => {
       router.push('/activities');
     } catch (error) {
       console.error('Error creating activity from front:', error);
+      alert('Error creating activity: ' + error.message);
     }
   };
 
