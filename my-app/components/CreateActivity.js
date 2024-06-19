@@ -47,7 +47,7 @@ const CreateActivity = () => {
 
       router.push('/activities');
     } catch (error) {
-      console.error('Error creating activity:', error);
+      console.error('Error creating activity from front:', error);
     }
   };
 
