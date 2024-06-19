@@ -7,14 +7,18 @@ import styles from '@/styles/Activities.module.css';
 const ActivityList = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchActivities = async () => {
       try {
+        console.log('Fetching activities from:', `${process.env.NEXT_PUBLIC_BACKENDURL}/activities`);
         const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities`);
+        console.log('Fetched activities:', res.data);
         setActivities(res.data);
       } catch (error) {
         console.error('Error fetching activities:', error);
+        setError('Failed to fetch activities.');
       } finally {
         setLoading(false);
       }
@@ -24,6 +28,7 @@ const ActivityList = () => {
   }, []);
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <Container className={styles.container}>
@@ -40,7 +45,7 @@ const ActivityList = () => {
                   {new Date(activity.date).toLocaleDateString()}<br />
                   Location: {activity.location}<br />
                   <Link href={`/activities/${activity._id}`}>More Info</Link><br />
-                  {activity.participants.length} people joined
+                  {activity.participants?.length || 0} people joined
                 </Card.Text>
                 <Button as={Link} href={`/activities/${activity._id}`} className="mt-2">View Details</Button>
               </Card.Body>
