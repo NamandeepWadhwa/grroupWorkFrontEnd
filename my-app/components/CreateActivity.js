@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import axios from 'axios';
 import styles from '@/styles/CreateActivity.module.css';
-import { gettingUser } from "../gettingUser";
+import { gettingUser } from "../lib/gettingUser";
 
 const CreateActivity = () => {
   const [newActivity, setNewActivity] = useState({
