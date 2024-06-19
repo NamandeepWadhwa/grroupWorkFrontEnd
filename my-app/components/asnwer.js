@@ -27,7 +27,7 @@ export default function Answer({answer,user=false}) {
         {formatDate(answer.created_at)}
         </Col>
         {user && <Col md={12} className="m-2">
-          <button className="btn btn-danger" onClick={handlviewQuestiont}>Edit</button>
+          <button className="btn btn-danger" onClick={handlviewQuestiont}>View</button>
           <button className="btn btn-danger m-2" onClick={handleDelete}>Delete</button>
         </Col>
         }
