@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
-  
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/freeboard`)
       .then(response => response.json())
