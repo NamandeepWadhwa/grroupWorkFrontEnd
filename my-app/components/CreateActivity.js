@@ -3,6 +3,7 @@ import { Container, Form, Button, Card } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
+import axios from 'axios';
 import styles from '@/styles/CreateActivity.module.css';
 
 const CreateActivity = () => {
@@ -34,15 +35,14 @@ const CreateActivity = () => {
     formData.append('image', newActivity.image);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities`, {
-        method: 'POST',
-        body: formData,
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities`, formData, {
         headers: {
+          'Content-Type': 'multipart/form-data',
         },
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to create activity');
+
+      if (!response.data) {
+        throw new Error('Failed to create activity, no data response');
       }
 
       router.push('/activities');
