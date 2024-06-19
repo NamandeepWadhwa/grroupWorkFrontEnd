@@ -9,7 +9,6 @@ const PostList = () => {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
   };
-
   const options = ["Title", "Contents", "Author"];
 
   return (
