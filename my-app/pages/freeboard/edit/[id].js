@@ -21,7 +21,6 @@ const EditPostPage = () => {
         console.error('Error fetching post:', error);
       }
     };
-
     if (id) {
       fetchPost();
     }
