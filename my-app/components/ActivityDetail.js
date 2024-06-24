@@ -6,7 +6,7 @@ import Link from 'next/link';
 import styles from '@/styles/ActivityDetail.module.css';
 
 const ActivityDetail = ({ id }) => {
-  const [activity, setActivity] = useState(null);
+  const [activityData, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
@@ -16,6 +16,7 @@ const ActivityDetail = ({ id }) => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
         setActivity(res.data);
+        console.log('Fetched activity:', res.data);
       } catch (error) {
         console.error('Error fetching activity:', error);
       } finally {
@@ -41,7 +42,6 @@ const ActivityDetail = ({ id }) => {
     try {
       await axios.delete(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
       alert('Activity deleted successfully!');
-      // Redirect to activities list or another appropriate page after deletion
       router.push('/activities');
     } catch (error) {
       console.error('Error deleting activity:', error);
@@ -53,8 +53,9 @@ const ActivityDetail = ({ id }) => {
   };
 
   if (loading) return <div>Loading...</div>;
-  if (!activity) return <div>Activity not found</div>;
+  if (!activityData) return <div>Activity not found</div>;
 
+  const { activity } = activityData;
   const participantsCount = activity.participants ? activity.participants.length : 0;
 
   return (
@@ -72,7 +73,7 @@ const ActivityDetail = ({ id }) => {
           </Card.Text>
           <Button onClick={handleJoinActivity}>Join Activity</Button>
 
-              <Link href={`/activities/edit/${activity._id}`}>
+              <Link href={`/activities/edit/${id}`}>
                 <Button variant="secondary" className="ml-2">Edit Activity</Button>
               </Link>
               <Button variant="danger" className="ml-2" onClick={handleDeleteActivity}>Delete Activity</Button>

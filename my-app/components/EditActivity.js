@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import styles from '@/styles/CreateActivity.module.css';
 
 const EditActivity = ({ id }) => {
-  const [activity, setActivity] = useState(null);
+  const [activityData, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -21,6 +21,9 @@ const EditActivity = ({ id }) => {
       }
     };
 
+    if (id) {
+      fetchActivity();
+    }
     fetchActivity();
   }, [id]);
 
@@ -52,7 +55,17 @@ const EditActivity = ({ id }) => {
   };
 
   if (loading) return <div>Loading...</div>;
-  if (!activity) return <div>Activity not found</div>;
+  if (!activityData) return <div>Activity not found</div>;
+
+  const { activity } = activityData;
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
 
   return (
     <Container className={styles.container}>
@@ -75,7 +88,7 @@ const EditActivity = ({ id }) => {
               <Form.Control
                 type="date"
                 name="date"
-                value={activity.date}
+                value={formatDate(activity.date)}
                 onChange={handleInputChange}
                 required
               />
