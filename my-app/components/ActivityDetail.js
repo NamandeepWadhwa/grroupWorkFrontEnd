@@ -71,14 +71,12 @@ const ActivityDetail = ({ id }) => {
             {participantsCount} people joined
           </Card.Text>
           <Button onClick={handleJoinActivity}>Join Activity</Button>
-          {activity.isCreator && (
-            <>
+
               <Link href={`/activities/edit/${activity._id}`}>
                 <Button variant="secondary" className="ml-2">Edit Activity</Button>
               </Link>
               <Button variant="danger" className="ml-2" onClick={handleDeleteActivity}>Delete Activity</Button>
-            </>
-          )}
+
         </Card.Body>
       </Card>
     </Container>
