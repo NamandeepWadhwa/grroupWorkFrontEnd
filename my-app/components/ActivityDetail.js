@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '@/styles/ActivityDetail.module.css';
 
 const ActivityDetail = ({ id }) => {
   const [activity, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter(); // Initialize useRouter for navigation
+  const router = useRouter();
+  const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
 
   useEffect(() => {
     const fetchActivity = async () => {
@@ -47,6 +48,10 @@ const ActivityDetail = ({ id }) => {
     }
   };
 
+  const handleImageError = (e) => {
+    e.target.src = defaultImage;
+  };
+
   if (loading) return <div>Loading...</div>;
   if (!activity) return <div>Activity not found</div>;
 
@@ -55,7 +60,8 @@ const ActivityDetail = ({ id }) => {
   return (
     <Container className={styles.container}>
       <Card>
-        <Card.Img variant="top" src={activity.image || '/default-image.jpg'} />
+        <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image || ''}`} 
+                onError={handleImageError} />
         <Card.Body>
           <Card.Title>{activity.title}</Card.Title>
           <Card.Text>

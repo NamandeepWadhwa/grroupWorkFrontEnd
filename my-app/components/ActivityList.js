@@ -8,6 +8,7 @@ const ActivityList = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -27,6 +28,10 @@ const ActivityList = () => {
     fetchActivities();
   }, []);
 
+  const handleImageError = (e) => {
+    e.target.src = defaultImage;
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -38,7 +43,8 @@ const ActivityList = () => {
         {activities.map(activity => (
           <Col key={activity._id} className={styles.col}>
             <Card className={styles.card}>
-              <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image}` || '/default-image.jpg'} />
+              <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image || ''}`} 
+                onError={handleImageError}  />
               <Card.Body className={styles.cardBody}>
                 <Card.Title className={styles.cardTitle}>{activity.title}</Card.Title>
                 <Card.Text className={styles.cardText}>
