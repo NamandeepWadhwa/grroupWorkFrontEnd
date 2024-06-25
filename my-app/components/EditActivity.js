@@ -29,7 +29,13 @@ const EditActivity = ({ id }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setActivity({ ...activity, [name]: value });
+    setActivity({
+      ...activityData,
+      activity: {
+        ...activityData.activity,
+        [name]: value
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
