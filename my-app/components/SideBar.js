@@ -37,6 +37,7 @@ const SideBar = ({ setActiveSection }) => {
                     <Nav className={styles.nav}>
                         <div className={styles.navul}>
                             <Nav.Link className={styles.navli} as={Link} href="/" onClick={() => setActiveSection('home')}>Home</Nav.Link>
+                            <Nav.Link className={styles.navli} as={Link} href="/profile" onClick={() => setActiveSection('profile')}>Profile</Nav.Link>
                             <Nav.Link className={styles.navli} as={Link} href="/events"onClick={() => setActiveSection('events')}>Events</Nav.Link>
                             <Nav.Link className={styles.navli} as={Link} href="/activities"onClick={() => setActiveSection('activities')}>Activities</Nav.Link>
                             <Nav.Link className={styles.navli} as={Link} href="/freeboard" onClick={() => setActiveSection('freeboard')}>Freeboard</Nav.Link>

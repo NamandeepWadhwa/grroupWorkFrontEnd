@@ -1,0 +1,24 @@
+.container {
+    margin-top: 50px;
+  }
+  
+  .profileImage {
+    max-width: 150px;
+    max-height: 150px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .profileDetails {
+    margin-top: 20px;
+  }
+  
+  .profileDetails h2 {
+    margin-bottom: 20px;
+  }
+  
+  .activityCard {
+    margin-bottom: 20px;
+  }
+  
