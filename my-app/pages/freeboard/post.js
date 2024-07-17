@@ -1,8 +1,8 @@
-import { formatISO9075 } from 'date-fns';
+import { format } from 'date-fns';
 import Link from 'next/link';
 import styles from '@/styles/Home.module.css';
 
-const Post = ({ _id, title, image, createdAt }) => {
+const Post = ({ _id, title, image, createdAt, user }) => {
   return (
     <div className={styles.post}>
       <div className="d-flex post">
@@ -16,11 +16,14 @@ const Post = ({ _id, title, image, createdAt }) => {
             <h3>{title}</h3>
           </Link>
           <p className="info">
-            <time>{formatISO9075(new Date(createdAt))}</time>
+            <time>{format(new Date(createdAt), 'yyyy-MM-dd')}</time>
+            {' | '}
+            {user && `${user.first_name} ${user.last_name}`}
           </p>
         </div>
       </div>
     </div>
   );
 };
+
 export default Post;
