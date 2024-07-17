@@ -1,9 +1,11 @@
+// createPost.js
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import axios from 'axios';
 import styles from "@/styles/Home.module.css";
+
 const Editor = dynamic(() => import('../pages/editor'), { ssr: false });
 
 const CreatePost = () => {
@@ -21,6 +23,8 @@ const CreatePost = () => {
     if (files) {
       formData.append('file', files[0]);
     }
+    const userId = localStorage.getItem('userId');
+    formData.append('userId', userId);
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/freeboard`, formData);
       if (res.status === 200) {
