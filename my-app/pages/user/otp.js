@@ -49,7 +49,11 @@ export default function BasicExample() {
         setEmailLocal(data2.email);
         setRole(data2.role);
         localStorage.setItem('userId', data.user._id);
-        router.push('/');
+        if(data.exists) {
+          router.push('/');
+        } else {
+          router.push('/profile/create');
+        }
       }
       else{
         alert(data.error);
