@@ -38,14 +38,21 @@ export default function BasicExample() {
       const data = await response.json();
       if(response.status === 200){
         setToken(data.token);
-        setEmailLocal(email);
-        setRole(role);
+        const response2 = await fetch(process.env.NEXT_PUBLIC_BACKENDURL+'/getUser', {
+          method: 'GET',
+          headers: {
+            Authorization: `JWT ${data.token}`,
+          },
+        });
+        const data2 = await response2.json();
+        console.log(data2);
+        setEmailLocal(data2.email);
+        setRole(data2.role);
         router.push('/');
       }
       else{
         alert(data.error);
       }
-      console.log(data);
     } catch (error) {
       console.error('An error occurred', error);
      alert("An error occurred Please try again");

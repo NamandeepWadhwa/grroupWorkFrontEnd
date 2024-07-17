@@ -1,6 +1,7 @@
 export function gettingUser() {
 
     const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
 
-    return { token };
+    return { token, role };
 }
