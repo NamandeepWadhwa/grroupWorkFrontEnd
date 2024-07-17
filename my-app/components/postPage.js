@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { formatISO9075 } from 'date-fns';
+import { format } from 'date-fns';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -56,7 +56,9 @@ const PostPage = ({ postInfo }) => {
             <div className="d-flex">
               <div className={styles.postHeader}>
                 <h1>{postInfo.title}</h1>
-                <time>{formatISO9075(new Date(postInfo.createdAt))}</time>
+                <time>{format(new Date(postInfo.createdAt), 'yyyy-MM-dd')}</time>
+                {' | '}
+                {postInfo.user && `${postInfo.user.first_name} ${postInfo.user.last_name}`}
               </div>
             </div>
             <div className={styles.image}>
