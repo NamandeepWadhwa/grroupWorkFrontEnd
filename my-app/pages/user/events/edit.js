@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import { Container, Form, Button,Image,Col,Alert } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Button,
+  Image,
+  Col,
+  Alert,
+  Badge,
+} from "react-bootstrap";
 import Router from "next/router";
-import {updateEvent }from "@/lib/evnet/upateEvent";
+import { updateEvent } from "@/lib/evnet/upateEvent";
 
 const EditEventPage = () => {
   const router = Router;
-  const event =JSON.parse(router.query.event);
+  const event = JSON.parse(router.query.event);
   const [title, setTitle] = useState(event.title || "");
   const [description, setDescription] = useState(event.description || "");
+  const [categories, setCategories] = useState(event.categories || []);
+  const [categoryInput, setCategoryInput] = useState("");
   const [file, setFile] = useState(null);
-  const [filePreview, setFilePreview] = useState(null); // State for file preview
+  const [filePreview, setFilePreview] = useState(null);
   const [error, setError] = useState("");
 
-  // If event has imageUrl, set initial filePreview
- 
-  // Placeholder for update function
   const handleUpdate = async (e) => {
     e.preventDefault();
     if (!title || !description) {
@@ -25,11 +32,11 @@ const EditEventPage = () => {
     setError("");
 
     let sendData = {
-      title: title,
-      description: description,
+      title,
+      description,
+      categories,
     };
 
-    // Handle file upload if a file is provided
     if (file !== null) {
       const formData = new FormData();
       formData.append("file", file);
@@ -45,25 +52,18 @@ const EditEventPage = () => {
         sendData.imageUrl = data.secure_url;
       } catch (err) {
         console.log(err);
-        
         return;
       }
     } else {
-      sendData.imageUrl = event.imageUrl || ""; // Preserve existing imageUrl if no new file
+      sendData.imageUrl = event.imageUrl || "";
     }
 
     try {
-
-      // Placeholder for update event logic
-      const data= await updateEvent(event._id,sendData);
-      // Implement your update logic here
-      // Example: const res = await updateEvent(event._id, sendData);
-       router.push(
-          {
-            pathname: `/user/events/${data._id}`,
-            query: { event: JSON.stringify(data) },
-          }
-        );
+      const data = await updateEvent(event._id, sendData);
+      router.push({
+        pathname: `/user/events/${data._id}`,
+        query: { event: JSON.stringify(data) },
+      });
     } catch (err) {
       console.log(err);
       setError("An error occurred during event update.");
@@ -80,6 +80,19 @@ const EditEventPage = () => {
     setFile(null);
     setFilePreview(null);
     document.getElementById("formFile").value = null;
+  };
+
+  const handleAddCategory = () => {
+    if (categoryInput.trim() !== "" && !categories.includes(categoryInput)) {
+      setCategories([...categories, categoryInput]);
+      setCategoryInput("");
+    }
+  };
+
+  const handleRemoveCategory = (categoryToRemove) => {
+    setCategories(
+      categories.filter((category) => category !== categoryToRemove)
+    );
   };
 
   return (
@@ -109,6 +122,33 @@ const EditEventPage = () => {
             required
           />
         </Form.Group>
+
+        <Form.Group controlId="formCategories">
+          <Form.Label>Categories</Form.Label>
+          <div className="d-flex mb-2">
+            <Form.Control
+              type="text"
+              placeholder="Add a category"
+              value={categoryInput}
+              onChange={(e) => setCategoryInput(e.target.value)}
+            />
+            <Button
+              variant="primary"
+              onClick={handleAddCategory}
+              className="ms-2"
+            >
+              Add
+            </Button>
+          </div>
+          <div>
+            {categories.map((category, index) => (
+              <Badge key={index} bg="secondary" className="me-1">
+                {category} &times;
+              </Badge>
+            ))}
+          </div>
+        </Form.Group>
+
         {event.imageUrl && (
           <div className="mb-3">
             <p className="text-muted">Current Image</p>
@@ -128,7 +168,12 @@ const EditEventPage = () => {
           {filePreview && (
             <div className="mb-3">
               <Col md={6}>
-                <Image src={filePreview} alt="Preview" thumbnail  style={{height:"45vh"}}/>
+                <Image
+                  src={filePreview}
+                  alt="Preview"
+                  thumbnail
+                  style={{ height: "45vh" }}
+                />
               </Col>
             </div>
           )}

@@ -9,14 +9,18 @@ function BasicExample() {
   const [events,setEvents] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getEvents();
+      const data = await getEvents(true);
       setEvents(data);
     };
     fetchData();
   }, []);
+  const reloadEvents= async (newest=true,category="") => {
+    const data = await getEvents(newest,category);
+    setEvents(data);
+  };
   return (
     <>
-    <EventNavbar />
+    <EventNavbar  reload={reloadEvents}/>
     <Container className={styles.scrollable}>
       {events.length === 0 ? (
         <h3 className="m-3">No events found</h3>

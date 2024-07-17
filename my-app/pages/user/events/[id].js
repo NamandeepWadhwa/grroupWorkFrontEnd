@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col, Image, Badge } from "react-bootstrap";
 import Link from "next/link";
 import styles from "@/styles/Question.module.css";
 import { formatDate } from "@/lib/DateFromat/askDateFormat";
@@ -17,8 +17,8 @@ const EventPage = () => {
           src="/backArrowQuestions.png"
           width={50}
           height={50}
-          alt="back arrow image"
-        ></Image>
+          alt="back arrow"
+        />
       </Link>
       <h1 className="mt-4">{event.title}</h1>
       <p>
@@ -40,6 +40,16 @@ const EventPage = () => {
       <p>
         <strong>Created At:</strong> {formatDate(event.created_at)}
       </p>
+      {event.category && event.category.length > 0 && (
+        <div className="mt-3">
+          <strong>Categories:</strong>{" "}
+          {event.category.map((category, index) => (
+            <Badge key={index} bg="secondary" className="me-1">
+              {category}
+            </Badge>
+          ))}
+        </div>
+      )}
     </Container>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { gettingUser } from "@/lib/gettingUser";
 import { createEvent } from "@/lib/evnet/createEvent";
 import Router from "next/router";
@@ -15,6 +14,8 @@ const MyForm = () => {
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
   const [error, setError] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [categoryInput, setCategoryInput] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +25,9 @@ const MyForm = () => {
       setError("");
 
       let sendData = {
-        title: title,
-        description: description,
+        title,
+        description,
+        categories,
       };
 
       // Handle file upload if a file is provided
@@ -56,14 +58,13 @@ const MyForm = () => {
         setDescription("");
         setFile(null);
         setFilePreview(null);
+        setCategories([]);
         const event = res.event;
         alert("Event created successfully.");
-        router.push(
-          {
-            pathname: `/events/${event._id}`,
-            query: { event: JSON.stringify(event) },
-          }
-        )
+        router.push({
+          pathname: `/events/${event._id}`,
+          query: { event: JSON.stringify(event) },
+        });
       } catch (err) {
         setError("An error occurred during event creation.");
       }
@@ -82,6 +83,19 @@ const MyForm = () => {
     document.getElementById("formFile").value = null;
   };
 
+  const handleAddCategory = () => {
+    if (categoryInput.trim() !== "" && !categories.includes(categoryInput)) {
+      setCategories([...categories, categoryInput]);
+      setCategoryInput("");
+    }
+  };
+
+  const handleRemoveCategory = (categoryToRemove) => {
+    setCategories(
+      categories.filter((category) => category !== categoryToRemove)
+    );
+  };
+
   if (role === "SSF Staff") {
     return (
       <Container>
@@ -90,8 +104,8 @@ const MyForm = () => {
             src="/backArrowQuestions.png"
             width={50}
             height={50}
-            alt="back arrow image"
-          ></Image>
+            alt="back arrow"
+          />
         </Link>
         <h1>Submit Your Details</h1>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -119,17 +133,48 @@ const MyForm = () => {
             />
           </Form.Group>
 
+          <Form.Group controlId="formCategories">
+            <Form.Label>Categories</Form.Label>
+            <div className="d-flex mb-2">
+              <Form.Control
+                type="text"
+                placeholder="Add a category"
+                value={categoryInput}
+                onChange={(e) => setCategoryInput(e.target.value)}
+              />
+              <Button
+                variant="primary"
+                onClick={handleAddCategory}
+                className="ms-2"
+              >
+                Add
+              </Button>
+            </div>
+            <div>
+              {categories.map((category, index) => (
+                <Button
+                  key={index}
+                  variant="outline-secondary"
+                  className="me-2 mb-2"
+                  onClick={() => handleRemoveCategory(category)}
+                >
+                  {category} &times;
+                </Button>
+              ))}
+            </div>
+          </Form.Group>
+
           <Form.Group controlId="formFile">
             <Form.Label>File</Form.Label>
             <Form.Control type="file" onChange={handleFileChange} />
             {file && (
               <>
-              <div  className="mt-2">
-                <img
-                  src={filePreview}
-                  alt="Preview"
-                  style={{ maxHeight: "200px", maxWidth: "100%" }}
-                />
+                <div className="mt-2">
+                  <img
+                    src={filePreview}
+                    alt="Preview"
+                    style={{ maxHeight: "200px", maxWidth: "100%" }}
+                  />
                 </div>
                 <Button
                   variant="danger"
@@ -138,23 +183,23 @@ const MyForm = () => {
                 >
                   Remove File
                 </Button>
-              
               </>
             )}
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="my-2">
+          <Button
+            variant="primary"
+            type="submit"
+            className="my-2"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Form>
       </Container>
     );
   } else {
-    return (
-      <>
-        <h1>Unauthorized</h1>
-      </>
-    );
+    return <h1>Unauthorized</h1>;
   }
 };
 
