@@ -18,6 +18,12 @@
 .createdAt {
     color: gray;
     font-size: 13px;
+    margin-top: 2.5px;
+    margin-left: 7px;
+}
+
+.user {
+    font-size: 15px;
 }
 
 .bodyContainer {
