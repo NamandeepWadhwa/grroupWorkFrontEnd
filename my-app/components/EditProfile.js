@@ -103,7 +103,6 @@ import React, { useState, useEffect } from 'react';
                  name="firstName"
                  value={profileData.firstName}
                  onChange={handleInputChange}
-                 disabled
                />
              </Form.Group>
              <Form.Group controlId="lastName" className="mb-3">
@@ -113,7 +112,6 @@ import React, { useState, useEffect } from 'react';
                  name="lastName"
                  value={profileData.lastName}
                  onChange={handleInputChange}
-                 disabled
                />
              </Form.Group>
              <Form.Group controlId="bio" className="mb-3">
