@@ -3,7 +3,7 @@ import CommentForm from "./commentForm";
 import style from "@/styles/Comment.module.css";
 import Comment from "./comment";
 
-const Comments = ({ postId, currentUser }) => {
+const Comments = ({ postId }) => {
   const [backendComments, setBackendComments] = useState([]);
   const [activeComment, setActiveComment] = useState(null);
 
@@ -27,6 +27,7 @@ const Comments = ({ postId, currentUser }) => {
 
   const addComment = async (text) => {
     try {
+      const userId = localStorage.getItem('userId');
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/freeboard/${postId}/comment`, {
         method: 'POST',
         headers: {
@@ -34,7 +35,7 @@ const Comments = ({ postId, currentUser }) => {
         },
         body: JSON.stringify({
           postId,
-          //userId: currentUser.email,
+          userId: userId,
           body: text,
         }),
       });
