@@ -1,5 +1,5 @@
 import CommentForm from "./commentForm";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { formatISO9075 } from 'date-fns';
 import style from '@/styles/Comment.module.css';
 
@@ -15,6 +15,15 @@ const Comment = ({
     activeComment &&
     activeComment.id === comment._id &&
     activeComment.type === "editing";
+
+    const [currentUserId, setCurrentUserId] = useState(null);
+
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        const userId = localStorage.getItem('userId');
+        setCurrentUserId(userId);
+      }
+    }, []);
 
     useEffect(() => {
         if (!comment) return;
@@ -52,7 +61,9 @@ const Comment = ({
             />
             )}
             </div>
-            <div className={style.actionContainer}>
+            {currentUserId === comment.user._id && (
+                <>
+                <div className={style.actionContainer}>
                 <button
                     className={style.editBtn}
                     onClick={() =>
@@ -68,6 +79,9 @@ const Comment = ({
                     Delete
                 </button>
             </div>
+                </>
+            )}
+            
         </div>
         {/* Optional: Reply functionality */}
         {/* {isReplying && (
