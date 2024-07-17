@@ -29,8 +29,13 @@ const Comment = ({
         <img src="/user-icon.png" alt="User Icon" className={style.img} />
       </div>
       <div className={style.cContainer}>
+        <div className="d-flex">
+        <div className={style.user}>
+          {comment.user && `${comment.user.first_name} ${comment.user.last_name}`}
+        </div>
         <div className={style.createdAt}>
           <time>{formattedCreatedAt}</time>
+        </div>
         </div>
         <div className={style.bodyContainer}>
             <div className={style.body}>
