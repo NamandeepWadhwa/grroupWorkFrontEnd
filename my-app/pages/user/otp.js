@@ -48,6 +48,7 @@ export default function BasicExample() {
         console.log(data2);
         setEmailLocal(data2.email);
         setRole(data2.role);
+        localStorage.setItem('userId', data.user._id);
         router.push('/');
       }
       else{
