@@ -1,7 +1,7 @@
-import Profile from "@/components/Profile";
+import CreateProfile from "@/components/CreateProfile";
 
-const CreateProfilePage = () => {
-  return <Profile isEditMode={true} />;
-};
+ const CreateProfilePage = () => {
+   return <CreateProfile />;
+ };
 
-export default CreateProfilePage;
+ export default CreateProfilePage;
