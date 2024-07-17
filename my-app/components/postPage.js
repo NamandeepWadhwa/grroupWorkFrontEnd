@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import axios from 'axios';
@@ -11,6 +11,14 @@ import Comments from '@/components/comments';
 
 const PostPage = ({ postInfo }) => {
   const router = useRouter();
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userId = localStorage.getItem('userId');
+      setCurrentUserId(userId);
+    }
+  }, []);
 
   useEffect(() => {
     if (!postInfo) return;
@@ -44,12 +52,16 @@ const PostPage = ({ postInfo }) => {
               </a>
             </Link>
           </div>
-          <Button onClick={handleEditClick} className={styles.eBtn}>
-            Edit post
-          </Button>
-          <Button onClick={handleDelete} className={styles.dBtn}>
-            Delete post
-          </Button>
+          {currentUserId === postInfo.user._id && (
+            <>
+            <Button onClick={handleEditClick} className={styles.eBtn}>
+              Edit post
+            </Button>
+            <Button onClick={handleDelete} className={styles.dBtn}>
+              Delete post
+            </Button>
+            </>
+          )}
         </div>
         <div className={styles.freeboardContainer}>
           <div className={styles.freeboard}>
