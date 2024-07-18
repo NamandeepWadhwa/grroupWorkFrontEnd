@@ -29,6 +29,8 @@ const CreateActivity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
+    const userId = localStorage.getItem('userId');
+    formData.append('userId', userId);
     formData.append('title', newActivity.title);
     formData.append('date', newActivity.date);
     formData.append('location', newActivity.location);
