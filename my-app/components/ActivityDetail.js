@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, act } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -10,7 +10,15 @@ const ActivityDetail = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
+  const [currentUserId, setCurrentUserId] = useState(null);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const userId = localStorage.getItem('userId');
+      setCurrentUserId(userId);
+    }
+  }, []);
+  
   useEffect(() => {
     const fetchActivity = async () => {
       try {
@@ -31,8 +39,21 @@ const ActivityDetail = ({ id }) => {
 
   const handleJoinActivity = async () => {
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/join`, { activityId: id });
-      alert('Joined activity successfully!');
+      const userId = localStorage.getItem('userId');
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/join`, { activityId: id, userId: userId });
+      if (res.data.error) {
+        console.log(res.data.error);
+        alert(res.data.error);
+      } else {
+        alert('Joined activity successfully!');
+        setActivity((prevData) => ({
+          ...prevData,
+          activity: {
+            ...prevData.activity,
+            joined: prevData.activity.joined + 1,
+          },
+        }));
+      }
     } catch (error) {
       console.error('Error joining activity:', error);
     }
@@ -56,7 +77,7 @@ const ActivityDetail = ({ id }) => {
   if (!activityData) return <div>Activity not found</div>;
 
   const { activity } = activityData;
-  const participantsCount = activity.participants ? activity.participants.length : 0;
+  const participantsCount = activity.joined ? activity.joined : 0;
 
   return (
     <Container className={styles.container}>
@@ -68,16 +89,19 @@ const ActivityDetail = ({ id }) => {
           <Card.Text>
             Date: {new Date(activity.date).toLocaleDateString()}<br />
             Location: {activity.location}<br />
+            Host: {activity.user.first_name} {activity.user.last_name}<br />
             <a href={activity.link} target="_blank" rel="noopener noreferrer">More Info</a><br />
             {participantsCount} people joined
           </Card.Text>
           <Button onClick={handleJoinActivity}>Join Activity</Button>
-
-              <Link href={`/activities/edit/${id}`}>
+          {currentUserId === activity.user._id && (
+            <>
+            <Link href={`/activities/edit/${id}`}>
                 <Button variant="secondary" className="ml-2">Edit Activity</Button>
               </Link>
               <Button variant="danger" className="ml-2" onClick={handleDeleteActivity}>Delete Activity</Button>
-
+            </>
+          )}
         </Card.Body>
       </Card>
     </Container>
