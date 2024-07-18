@@ -45,6 +45,7 @@ const MyForm = () => {
           const data = await response.json();
           sendData.imageUrl = data.secure_url;
         } catch (err) {
+          console.log(err);
           setError("An error occurred during file upload.");
           return;
         }
