@@ -69,7 +69,7 @@ import React, { useState, useEffect } from 'react';
                  <Card.Text>
                    Date: {new Date(activity.date).toLocaleDateString()}<br />
                    Location: {activity.location}<br />
-                   <a href={activity.link} target="_blank" rel="noopener noreferrer">More Info</a>
+                   <a href={`/activities/${activity._id}`}>More Info</a>
                  </Card.Text>
                </Card.Body>
              </Card>
