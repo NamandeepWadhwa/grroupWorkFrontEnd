@@ -50,7 +50,8 @@ const ActivityList = () => {
                 <Card.Text className={styles.cardText}>
                   {new Date(activity.date).toLocaleDateString()}<br />
                   Location: {activity.location}<br />
-                  {activity.participants?.length || 0} people joined
+                  Host: {activity.user.first_name} {activity.user.last_name}<br />
+                  {activity.joined} people joined
                 </Card.Text>
                 <Button as={Link} href={`/activities/${activity._id}`} className="mt-2">View Details</Button>
               </Card.Body>
