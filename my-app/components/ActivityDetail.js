@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '@/styles/ActivityDetail.module.css';
 import GroupChatModal from './GroupChat';
+import { gettingUser } from '../lib/gettingUser';
 
 const ActivityDetail = () => {
   const [activityData, setActivity] = useState(null);
@@ -71,15 +72,20 @@ const ActivityDetail = () => {
   };
 
   const handleDeleteActivity = async () => {
-    try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
-      alert('Activity deleted successfully!');
-      router.push('/activities');
-    } catch (error) {
-      console.error('Error deleting activity:', error);
+    if (window.confirm('Are you sure you want to delete this activity?')) {
+
+      try {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`, {
+          headers: {
+            Authorization:`JWT ${gettingUser().token}`,
+          },
+        });
+        router.push('/activities');
+      } catch (error) {
+        console.error('Error deleting activity:', error);
+      }
     }
   };
-  
 
   const handleImageError = (e) => {
     e.target.src = defaultImage;
