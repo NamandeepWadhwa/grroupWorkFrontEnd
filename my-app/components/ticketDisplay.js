@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap";
 import { formatDate } from "@/lib/DateFromat/askDateFormat";
 export default function TicketDisplay({ ticket }) {
   const router = Router;
-  console.log(ticket);
+  
 
   return (
     <>
