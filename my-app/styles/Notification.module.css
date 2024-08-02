@@ -1,0 +1,22 @@
+.container {
+    padding: 20px;
+  }
+  
+  .notificationCard {
+    margin-bottom: 20px;
+  }
+  
+  .notificationCardTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .notificationCardBody {
+    padding: 10px;
+  }
+  
+  .notificationCardFooter {
+    background-color: #f8f9fa;
+    text-align: right;
+  }
+  
