@@ -97,6 +97,7 @@ const Comments = ({ postId }) => {
             addComment={addComment}
             deleteComment={deleteComment}
             updateComment={updateComment}
+            canEdit={true}
           />
         ))}
       </div>
