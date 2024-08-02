@@ -6,7 +6,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 import {createQuestion} from '@/lib/question/createQuestion';
-import Router from "next/router";
+
 
 export default function Create() {
   const router = useRouter();

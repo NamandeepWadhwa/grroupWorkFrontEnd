@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Container,
   Form,
@@ -10,13 +9,40 @@ import {
 } from "react-bootstrap";
 import Router from "next/router";
 import { updateEvent } from "@/lib/evnet/upateEvent";
+import {getEventById} from "@/lib/evnet/getEventById";
+import { useEffect,useState } from "react";
+import Link from "next/link";
 
 const EditEventPage = () => {
   const router = Router;
-  const event = JSON.parse(router.query.event);
-  const [title, setTitle] = useState(event.title || "");
-  const [description, setDescription] = useState(event.description || "");
-  const [categories, setCategories] = useState(event.categories || []);
+  const {id} = router.query;
+  const [event, setEvent] = useState(null);
+  useEffect(() => {
+    if (!id) return; // If id is undefined, do nothing
+
+    const fetchData = async () => {
+      try {
+        const data = await getEventById(id);
+        if (data === null) {
+          router.push("/events");
+          return;
+        }
+        console.log(data);
+        setEvent(data);
+        setTitle(data.title);
+        setDescription(data.description);
+        setCategories(data.category);
+      } catch (err) {
+        console.log(err);
+        setEvent(null);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  const [title, setTitle] = useState( "");
+  const [description, setDescription] = useState("");
+  const [categories, setCategories] = useState([]);
   const [categoryInput, setCategoryInput] = useState("");
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
@@ -94,9 +120,19 @@ const EditEventPage = () => {
       categories.filter((category) => category !== categoryToRemove)
     );
   };
-
+if(event === null){
+  return <h1>Loading</h1>
+}
   return (
     <Container>
+      <Link href="/user/events" className="py-2">
+        <Image
+          src="/backArrowQuestions.png"
+          width={50}
+          height={50}
+          alt="back arrow"
+        />
+      </Link>
       <h1>Edit Event</h1>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleUpdate}>

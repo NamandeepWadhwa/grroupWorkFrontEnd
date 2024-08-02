@@ -15,12 +15,12 @@ export default function EventNavbar({reload}) {
   let ssfStaff=role==="SSF Staff";
   const sortNewest = async (e) => {
     setNewest(true);
-    await reload(newest);
+    await reload(true);
 
   };
   const sortOldest = async (e) => {
     setNewest(false);
-    await reload(newest);
+    await reload(false);
   };
   const submitTag = async (e) => {
     e.preventDefault();

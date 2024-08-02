@@ -4,13 +4,35 @@ import { Container, Row, Col, Image, Badge } from "react-bootstrap";
 import Link from "next/link";
 import styles from "@/styles/Question.module.css";
 import { formatDate } from "@/lib/DateFromat/askDateFormat";
+import  {getEventById}  from "@/lib/evnet/getEventById";
+import { useEffect, useState } from "react";
 
 const EventPage = () => {
+  const [event, setEvent] = useState(null);
   const router = useRouter();
-  const id = router.query.id;
-  const event = JSON.parse(router.query.event);
+  const { id } = router.query;
 
+ 
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getEventById(id);
+      if(data === null){
+       
+        router.push("/events");
+      }
+      console.log(data);
+
+      setEvent(data);
+    };
+    fetchData();
+  }, [id]);
+ 
+if (event == null) {
+  return <h1>Loading...</h1>;
+}
   return (
+    
     <Container className={styles.scrollable}>
       <Link href="/events">
         <Image

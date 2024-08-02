@@ -13,8 +13,8 @@ export default function DisplayEvent({ event,ssf=false,reload}) {
   const handleEdit=()=>{
     console.log("Edit event");
    router.push({
-     pathname:"/user/events/edit",
-     query: { event: JSON.stringify(event) },
+     pathname:`/user/events/editEvents/${event._id}`,
+     
    });
   
   }
@@ -46,8 +46,7 @@ export default function DisplayEvent({ event,ssf=false,reload}) {
               e.preventDefault();
               router.push({
                 pathname: pathname,
-                query: { event: JSON.stringify(event) },
-              });
+            });
             }}
           >
             View Event

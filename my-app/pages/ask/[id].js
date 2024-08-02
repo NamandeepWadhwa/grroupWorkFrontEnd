@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form';
 import {postingAnswer} from '@/lib/answer/postingAsnwer';
 import {getAnswers} from '@/lib/answer/getAnswers';
 import Answer from '@/components/asnwer';
- 
+
 export default function Page() {
   const [answers,setAnswers] = useState([]);
   const [question, setQuestion] = useState("");
