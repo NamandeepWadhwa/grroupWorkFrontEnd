@@ -10,7 +10,7 @@ const ActivityDetail = () => {
   const [activityData, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { id } = router.query; 
+  const { id } = router.query;
   const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
   const [currentUserId, setCurrentUserId] = useState(null);
   const [isJoined, setIsJoined] = useState(false);
@@ -22,20 +22,18 @@ const ActivityDetail = () => {
       setCurrentUserId(userId);
     }
   }, []);
-  
+
   useEffect(() => {
     const fetchActivity = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
         setActivity(res.data);
-        console.log('Fetched activity:', res.data);
 
         if (res.data.activity.participants.includes(currentUserId)) {
           setIsJoined(true);
         } else {
           setIsJoined(false);
         }
-
       } catch (error) {
         console.error('Error fetching activity:', error);
       } finally {
@@ -52,6 +50,7 @@ const ActivityDetail = () => {
     try {
       const userId = localStorage.getItem('userId');
       const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/join`, { activityId: id, userId: userId });
+
       if (res.data.error) {
         console.log(res.data.error);
         alert(res.data.error);
@@ -80,6 +79,7 @@ const ActivityDetail = () => {
       console.error('Error deleting activity:', error);
     }
   };
+  
 
   const handleImageError = (e) => {
     e.target.src = defaultImage;
@@ -112,7 +112,7 @@ const ActivityDetail = () => {
           )}
           {currentUserId === activity.user._id && (
             <>
-            <Link href={`/activities/edit/${id}`}>
+              <Link href={`/activities/edit/${id}`}>
                 <Button variant="secondary" className="ml-2">Edit Activity</Button>
               </Link>
               <Button variant="danger" className="ml-2" onClick={handleDeleteActivity}>Delete Activity</Button>
