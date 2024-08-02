@@ -10,7 +10,7 @@ const ActivityDetail = () => {
   const [activityData, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const { id } = router.query; // Get the activity id from the URL
+  const { id } = router.query; 
   const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
   const [currentUserId, setCurrentUserId] = useState(null);
   const [isJoined, setIsJoined] = useState(false);
