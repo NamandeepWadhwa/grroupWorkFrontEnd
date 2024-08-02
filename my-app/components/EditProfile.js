@@ -45,7 +45,6 @@ import React, { useState, useEffect } from 'react';
          setLoading(false);
        }
      };
-
      fetchProfileData();
    }, []);
 
