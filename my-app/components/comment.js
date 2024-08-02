@@ -10,6 +10,7 @@ const Comment = ({
   updateComment,
   deleteComment,
   addComment,
+  canEdit,
 }) => {
   const isEditing =
     activeComment &&
@@ -61,7 +62,7 @@ const Comment = ({
             />
             )}
             </div>
-            {currentUserId === comment.user._id && (
+            {canEdit && currentUserId === comment.user._id && (
                 <>
                 <div className={style.actionContainer}>
                 <button
@@ -72,6 +73,12 @@ const Comment = ({
                 >
                     Edit
                 </button>
+            </div>
+                </>
+            )}
+            {currentUserId === comment.user._id && (
+                <>
+                <div className={style.actionContainer}>
                 <button
                     className={style.deleteBtn}
                     onClick={() => deleteComment(comment._id)}
@@ -80,8 +87,7 @@ const Comment = ({
                 </button>
             </div>
                 </>
-            )}
-            
+            )}            
         </div>
         {/* Optional: Reply functionality */}
         {/* {isReplying && (
