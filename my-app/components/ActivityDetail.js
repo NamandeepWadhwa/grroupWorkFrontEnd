@@ -1,16 +1,20 @@
-import React, { useState, useEffect, act } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from '@/styles/ActivityDetail.module.css';
+import GroupChatModal from './GroupChat';
 
-const ActivityDetail = ({ id }) => {
+const ActivityDetail = () => {
   const [activityData, setActivity] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { id } = router.query; // Get the activity id from the URL
   const defaultImage = 'https://images.adsttc.com/media/images/6196/b960/9a95/7a76/4f1e/5b68/large_jpg/newnham-campus-food-hall-taylor-smyth-architects-20.jpg?1637267827';
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [isJoined, setIsJoined] = useState(false);
+  const [showGroupChatModal, setShowGroupChatModal] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -25,6 +29,13 @@ const ActivityDetail = ({ id }) => {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
         setActivity(res.data);
         console.log('Fetched activity:', res.data);
+
+        if (res.data.activity.participants.includes(currentUserId)) {
+          setIsJoined(true);
+        } else {
+          setIsJoined(false);
+        }
+
       } catch (error) {
         console.error('Error fetching activity:', error);
       } finally {
@@ -35,7 +46,7 @@ const ActivityDetail = ({ id }) => {
     if (id) {
       fetchActivity();
     }
-  }, [id]);
+  }, [id, currentUserId]);
 
   const handleJoinActivity = async () => {
     try {
@@ -46,6 +57,7 @@ const ActivityDetail = ({ id }) => {
         alert(res.data.error);
       } else {
         alert('Joined activity successfully!');
+        setIsJoined(true);
         setActivity((prevData) => ({
           ...prevData,
           activity: {
@@ -93,7 +105,11 @@ const ActivityDetail = ({ id }) => {
             <a href={activity.link} target="_blank" rel="noopener noreferrer">More Info</a><br />
             {participantsCount} people joined
           </Card.Text>
-          <Button onClick={handleJoinActivity}>Join Activity</Button>
+          {isJoined ? (
+            <Button onClick={() => setShowGroupChatModal(true)}>Group Chat</Button>
+          ) : (
+            <Button onClick={handleJoinActivity}>Join Activity</Button>
+          )}
           {currentUserId === activity.user._id && (
             <>
             <Link href={`/activities/edit/${id}`}>
@@ -104,6 +120,12 @@ const ActivityDetail = ({ id }) => {
           )}
         </Card.Body>
       </Card>
+
+      <GroupChatModal
+        show={showGroupChatModal}
+        onHide={() => setShowGroupChatModal(false)}
+        activityId={id} 
+      />
     </Container>
   );
 };
