@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import axios from 'axios';
 import styles from '@/styles/Notification.module.css';
+import { gettingUser } from '../lib/gettingUser';
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -10,7 +11,11 @@ const Notification = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/notifications`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/notifications`, {
+          headers: {
+            Authorization:`JWT ${gettingUser().token}`,
+          },
+        });
         setNotifications(res.data);
       } catch (error) {
         console.error('Error fetching notifications:', error);
