@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import axios from 'axios';
 import styles from '@/styles/Notification.module.css';
 import { gettingUser } from '../lib/gettingUser';
+import Link from 'next/link';
 
 const Notification = () => {
   const [notifications, setNotifications] = useState([]);
@@ -54,7 +55,9 @@ const Notification = () => {
             <Card.Body>
               <Card.Title>{notification.title}</Card.Title>
               <Card.Text>
-                {notification.message}
+                <Link href={notification.url}>
+                  {notification.message}
+                </Link>
               </Card.Text>
               <Button variant="danger" onClick={() => handleDeleteNotification(notification._id)}>Delete</Button>
             </Card.Body>
