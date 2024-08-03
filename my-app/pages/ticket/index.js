@@ -12,7 +12,7 @@ import {getAllTickets} from "@/lib/ticket/getAllTickets"
 
 
 export default function Page() {
-  const role=gettingUser().role;
+  const role=gettingUser().role.toLowerCase();
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
