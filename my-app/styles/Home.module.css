@@ -40,6 +40,19 @@
   width: 100%;
 }
 
+.navSearch {
+  margin-top: 10px;
+}
+
+.option {
+  min-width: 15%;
+  max-width: 28%;
+}
+.search {
+  min-width: 55%;
+  max-width: 67%;
+}
+
 .navul {
   list-style: none;
   padding: 0;
@@ -183,6 +196,9 @@
 }
 
 .freeboard {
+  min-height: 80vh;
+  max-height: 85vh;
+  overflow-y: auto;
   border: 2px solid gray;
   border-radius: 15px;
   padding: 10px 20px 15px 20px;
@@ -191,8 +207,6 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
-  height: 60%;
-  min-height: 600px;
 }
 
 @media (max-width: 800px) {
@@ -329,6 +343,9 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  min-height: 90vh;
+  max-height: 95vh;
+  overflow-y: auto;
 }
 
 .commentsSection {
