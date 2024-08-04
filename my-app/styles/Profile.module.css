@@ -1,5 +1,7 @@
 .container {
-    margin-top: 50px;
+    min-height: 90vh;
+    max-height: 95vh;
+    overflow-y: scroll;
   }
   
   .profileImage {
@@ -22,3 +24,8 @@
     margin-bottom: 20px;
   }
   
+  .privateBtn {
+    display: flex;
+    margin-top: 10px;
+    justify-content: flex-end;
+  }
