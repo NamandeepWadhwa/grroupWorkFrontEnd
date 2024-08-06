@@ -13,11 +13,12 @@ const CreatePost = () => {
   const [files, setFiles] = useState(null);
   const [redirect, setRedirect] = useState(false);
   const [errors, setErrors] = useState({});
+  const preset_key = "hgq8fclw";
+  const cloud_name = "dtgdo1ajo";
   const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
     const newErrors = {};
     if (!title) newErrors.title = "Title is required.";
     if (!content) newErrors.content = "Content is required.";
@@ -28,7 +29,21 @@ const CreatePost = () => {
       return;
     }
 
+    const imgData = new FormData();
+    imgData.append('file', files[0]);
+    imgData.append("upload_preset", preset_key);
+    imgData.append("cloud_name", cloud_name);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+      {
+        method: "POST",
+        body: imgData
+      }
+    )
+    const image = await res.json();
+    const imageUrl = image.secure_url;
+
     const formData = new FormData();
+    formData.append('image', imageUrl);
     formData.append('title', title);
     formData.append('content', content);
     if (files) {
