@@ -58,7 +58,6 @@ const EditProfile = () => {
         setLoading(false);
       }
     };
-
     fetchProfileData();
   }, []);
 
