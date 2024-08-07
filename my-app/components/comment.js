@@ -36,7 +36,7 @@ const Comment = ({
   return (
     <div key={comment._id} className={style.comment}>
       <div className={style.imgContainer}>
-        <img src="/user-icon.png" alt="User Icon" className={style.img} />
+        <img src={comment.user.profile_picture} alt="User Icon" className={style.img} width="50" height="50"/>
       </div>
       <div className={style.cContainer}>
         <div className="d-flex">
