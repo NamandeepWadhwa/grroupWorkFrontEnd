@@ -16,13 +16,14 @@ const Post = ({ _id, title, image, createdAt, user }) => {
       setCurrentUserId(userId);
     }
   }, []);
+  console.log(image);
 
   return (
     <div className={styles.post}>
       <div className="d-flex post">
         <div className={styles.postImageCard}>
           <Link href={`/freeboard/${_id}`}>
-            <img src={`${process.env.NEXT_PUBLIC_BACKENDURL}/${image}`} alt="Post Image" />
+            <img src={image} alt="Post Image" />
           </Link>
         </div>
         <div>
