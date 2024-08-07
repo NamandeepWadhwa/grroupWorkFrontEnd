@@ -74,7 +74,7 @@ const PostPage = ({ postInfo }) => {
               </div>
             </div>
             <div className={styles.image}>
-              <img src={`${process.env.NEXT_PUBLIC_BACKENDURL}/${postInfo.image}`} alt="" />
+              <img src={postInfo.image} alt="" />
             </div>
             <div className="content" dangerouslySetInnerHTML={{ __html: postInfo.content }} />
           </div>
