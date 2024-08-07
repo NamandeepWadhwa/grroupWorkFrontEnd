@@ -45,7 +45,7 @@ import React, { useState, useEffect } from 'react';
        <Card.Body>
          <Card.Title>Profile</Card.Title>
          <div className={styles.profilePicture}>
-           <img src="/user-icon.png" alt="User Icon"/>
+          <img src={profileData.profile_picture} alt="User Icon" width="100" height="100" />
          </div>
          <Card.Text>
            <strong>Name:</strong> {profileData.first_name} {profileData.last_name}<br />
