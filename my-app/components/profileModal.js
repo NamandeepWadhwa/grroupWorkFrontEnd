@@ -15,7 +15,7 @@ const ProfileModal = ({ show, onHide, user, currentUser }) => {
           <Card.Body>
             <Card.Title>Profile</Card.Title>
             <div className={styles.profilePicture}>
-              <img src={user.profile_picture} alt="User Icon" />
+              <img src={user.profile_picture} alt="User Icon" width="100" height="100" />
             </div>
             <Card.Text>
               <strong>Name:</strong> {user.first_name} {user.last_name}<br />
