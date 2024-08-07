@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Card } from 'react-bootstrap';
+import { Container, Form, Button, Card, Image, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import styles from '@/styles/CreateActivity.module.css';
 import { gettingUser } from '../lib/gettingUser';
 
 const EditActivity = () => {
-  const [activityData, setActivity] = useState(null);
+  const [activityData, setActivity] = useState({
+    activity: {
+      title: '',
+      date: '',
+      location: '',
+      link: '',
+      image: ''
+    }
+  });
   const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState(null);
+  const [filePreview, setFilePreview] = useState(null);
   const router = useRouter();
   const { id } = router.query;
 
@@ -16,7 +26,13 @@ const EditActivity = () => {
       if (id) {
         try {
           const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`);
-          setActivity(res.data);
+          const { activity } = res.data;
+          setActivity({
+            activity: {
+              ...activity,
+              date: formatDate(activity.date)
+            }
+          });
         } catch (error) {
           console.error('Error fetching activity:', error);
         } finally {
@@ -31,17 +47,55 @@ const EditActivity = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setActivity((prevData) => ({
-      ...prevData,
-      [name]: value
+      activity: {
+        ...prevData.activity,
+        [name]: value
+      }
     }));
+  };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFilePreview(URL.createObjectURL(selectedFile));
+  };
+
+  const handleFileRemove = () => {
+    setFile(null);
+    setFilePreview(null);
+    document.getElementById('formFile').value = null;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { token } = gettingUser();
 
+    let image = activityData.activity.image;
+    if (file) {
+      try {
+        const imageFormData = new FormData();
+        imageFormData.append("file", file);
+        imageFormData.append("upload_preset", "events");
+        imageFormData.append("cloud_name", "dvw5kbnsi");
+
+        const response = await fetch(process.env.NEXT_PUBLIC_IMAGESTORE, {
+          method: "POST",
+          body: imageFormData,
+        });
+        const data = await response.json();
+        image = data.secure_url;
+      } catch (err) {
+        console.log(err);
+        setError("An error occurred during file upload.");
+        return;
+      }
+    }
+
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`, activityData, {
+      await axios.put(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities/${id}`, {
+        ...activityData.activity,
+        image
+      }, {
         headers: {
           Authorization: `JWT ${token}`,
           'Content-Type': 'application/json',
@@ -79,7 +133,9 @@ const EditActivity = () => {
   };
 
   if (loading) return <div>Loading...</div>;
-  if (!activityData) return <div>Activity not found</div>;
+  if (!activityData.activity) return <div>Activity not found</div>;
+
+  const { activity } = activityData;
 
   return (
     <Container className={styles.container}>
@@ -92,7 +148,7 @@ const EditActivity = () => {
               <Form.Control
                 type="text"
                 name="title"
-                value={activityData.title}
+                value={activity.title}
                 onChange={handleInputChange}
                 required
               />
@@ -102,7 +158,7 @@ const EditActivity = () => {
               <Form.Control
                 type="date"
                 name="date"
-                value={activityData.date}
+                value={activity.date}
                 onChange={handleInputChange}
                 required
               />
@@ -112,7 +168,7 @@ const EditActivity = () => {
               <Form.Control
                 type="text"
                 name="location"
-                value={activityData.location}
+                value={activity.location}
                 onChange={handleInputChange}
                 required
               />
@@ -122,10 +178,44 @@ const EditActivity = () => {
               <Form.Control
                 type="text"
                 name="link"
-                value={activityData.link}
+                value={activity.link}
                 onChange={handleInputChange}
                 required
               />
+            </Form.Group>
+            {activity.image && (
+              <div className="mb-3">
+                <p className="text-muted">Current Image</p>
+                <Col md={6}>
+                  <Image
+                    src={activity.image}
+                    alt="Current Image"
+                    thumbnail
+                    style={{ height: '45vh' }}
+                  />
+                </Col>
+              </div>
+            )}
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>Image</Form.Label>
+              {filePreview && (
+                <div className="mb-3">
+                  <Col md={6}>
+                    <Image
+                      src={filePreview}
+                      alt="Preview"
+                      thumbnail
+                      style={{ height: '45vh' }}
+                    />
+                  </Col>
+                </div>
+              )}
+              <Form.Control type="file" onChange={handleFileChange} />
+              {file && (
+                <Button variant="danger" onClick={handleFileRemove} className="mt-2">
+                  Remove File
+                </Button>
+              )}
             </Form.Group>
             <Button type="submit">Update Activity</Button>
           </Form>

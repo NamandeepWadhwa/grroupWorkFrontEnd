@@ -53,7 +53,7 @@ const CreateActivity = () => {
           body: imageFormData,
         });
         const data = await response.json();
-        formData.append('imageUrl', data.secure_url);
+        formData.append('image', data.secure_url);
       } catch (err) {
         console.log(err);
         setError("An error occurred during file upload.");
