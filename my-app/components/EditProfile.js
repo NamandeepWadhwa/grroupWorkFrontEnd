@@ -4,6 +4,9 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import styles from '@/styles/Profile.module.css';
 
+const preset_key = "hgq8fclw";
+const cloud_name = "dtgdo1ajo";
+
 const EditProfile = () => {
   const [profileData, setProfileData] = useState({
     firstName: '',
@@ -64,9 +67,19 @@ const EditProfile = () => {
     setProfileData({ ...profileData, [name]: value });
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    setProfileData({ ...profileData, profilePicture: file });
+    const imgData = new FormData();
+    imgData.append('file', file);
+    imgData.append("upload_preset", preset_key);
+    imgData.append("cloud_name", cloud_name);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, {
+      method: "POST",
+      body: imgData
+    });
+    const image = await res.json();
+    const imageUrl = image.secure_url;
+    setProfileData({ ...profileData, profilePicture: imageUrl });
     setImagePreview(URL.createObjectURL(file));
   };
 
@@ -91,7 +104,7 @@ const EditProfile = () => {
     try {
       await axios.put(`${process.env.NEXT_PUBLIC_BACKENDURL}/profile/${userId}`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json'
         },
       });
       alert('Profile updated successfully!');
