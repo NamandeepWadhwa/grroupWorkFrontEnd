@@ -43,7 +43,7 @@ const ActivityList = () => {
         {activities.map(activity => (
           <Col key={activity._id} className={styles.col}>
             <Card className={styles.card}>
-              <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image || ''}`} 
+              <Card.Img variant="top" src={activity.image ? activity.image : defaultImage}
                 onError={handleImageError}  />
               <Card.Body className={styles.cardBody}>
                 <Card.Title className={styles.cardTitle}>{activity.title}</Card.Title>

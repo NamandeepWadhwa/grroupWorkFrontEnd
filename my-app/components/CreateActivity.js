@@ -15,6 +15,9 @@ const CreateActivity = () => {
     link: '',
     image: null,
   });
+
+  const [filePreview, setFilePreview] = useState(null);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -23,7 +26,9 @@ const CreateActivity = () => {
   };
 
   const handleImageChange = (e) => {
-    setNewActivity({ ...newActivity, image: e.target.files[0] });
+    const selectedFile = e.target.files[0];
+    setNewActivity({ ...newActivity, image: selectedFile });
+    setFilePreview(URL.createObjectURL(selectedFile));
   };
 
   const handleSubmit = async (e) => {
@@ -35,7 +40,26 @@ const CreateActivity = () => {
     formData.append('date', newActivity.date);
     formData.append('location', newActivity.location);
     formData.append('link', newActivity.link);
-    formData.append('image', newActivity.image);
+
+    if (newActivity.image) {
+      try {
+        const imageFormData = new FormData();
+        imageFormData.append("file", newActivity.image);
+        imageFormData.append("upload_preset", "events");
+        imageFormData.append("cloud_name", "dvw5kbnsi");
+
+        const response = await fetch(process.env.NEXT_PUBLIC_IMAGESTORE, {
+          method: "POST",
+          body: imageFormData,
+        });
+        const data = await response.json();
+        formData.append('imageUrl', data.secure_url);
+      } catch (err) {
+        console.log(err);
+        setError("An error occurred during file upload.");
+        return;
+      }
+    }
 
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKENDURL}/activities`, formData, {

@@ -100,8 +100,8 @@ const ActivityDetail = () => {
   return (
     <Container className={styles.container}>
       <Card>
-        <Card.Img variant="top" src={`${process.env.NEXT_PUBLIC_BACKENDURL}/uploads/${activity.image || ''}`} 
-                onError={handleImageError} />
+        <Card.Img variant="top" src={activity.image ? activity.image : defaultImage} 
+                onError={handleImageError} className={styles.activityDetailImage}/>
         <Card.Body>
           <Card.Title>{activity.title}</Card.Title>
           <Card.Text>
