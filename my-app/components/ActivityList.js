@@ -37,28 +37,30 @@ const ActivityList = () => {
 
   return (
     <Container className={styles.container}>
-      <h1>Activities</h1>
-      <Button as={Link} href="/activities/create" className={`mb-4 ${styles.createActivityButton}`}>Create New Activity</Button>
-      <Row className={styles.row}>
-        {activities.map(activity => (
-          <Col key={activity._id} className={styles.col}>
-            <Card className={styles.card}>
-              <Card.Img variant="top" src={activity.image ? activity.image : defaultImage}
-                onError={handleImageError}  />
-              <Card.Body className={styles.cardBody}>
-                <Card.Title className={styles.cardTitle}>{activity.title}</Card.Title>
-                <Card.Text className={styles.cardText}>
-                  {new Date(activity.date).toLocaleDateString()}<br />
-                  Location: {activity.location}<br />
-                  Host: {activity.user.first_name} {activity.user.last_name}<br />
-                  {activity.joined} people joined
-                </Card.Text>
-                <Button as={Link} href={`/activities/${activity._id}`} className="mt-2">View Details</Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <header className={styles.header}>
+        <h1>Activities</h1>
+        <Button as={Link} href="/activities/create" className={`mb-4 ${styles.createActivityButton}`}>Create New Activity</Button>
+      </header>
+      <div className={styles.scrollableContainer}>
+        <Row className={styles.row}>
+          {activities.map(activity => (
+            <Col key={activity._id} xs={12} sm={4} className={styles.col}>
+              <Card as={Link} href={`/activities/${activity._id}`} className={styles.card}>
+                <Card.Img variant="top" src={activity.image ? activity.image : defaultImage} onError={handleImageError} />
+                <Card.Body className={styles.cardBody}>
+                  <Card.Title className={styles.cardTitle}>{activity.title}</Card.Title>
+                  <Card.Text className={styles.cardText}>
+                    {new Date(activity.date).toLocaleDateString()}<br />
+                    Location: {activity.location}<br />
+                    Host: {activity.user.first_name} {activity.user.last_name}<br />
+                    {activity.joined} people joined
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </div>
     </Container>
   );
 };

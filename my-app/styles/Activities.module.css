@@ -1,91 +1,65 @@
-.activitiesContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  .activityCard {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-  }
-  
-  .activityCard:hover {
-    transform: translateY(-5px);
-    transition: transform 0.3s ease;
-  }
-  
-  .activityCardContent {
-    position: relative;
-    padding: 10px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
-    color: #fff;
-  }
-  
-  .activityCardImage {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-  
-  .activityCardTitle {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .activityCardSubtitle {
-    font-size: 14px;
-  }
-  
-  .activityCardFooter {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .activityCardFooterItem {
-    display: flex;
-    align-items: center;
-  }
-  
-  .activityCardFooterItem span {
-    margin-left: 5px;
-    font-size: 14px;
-  }
-  
-  .activityCardFooterButton {
-    padding: 5px 10px;
-    background-color: #ab171c;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .activityCardFooterButton:hover {
-    background-color: #ab171c;
-  }
-  
-  .createActivityButton {
-    background-color: #ab171c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .createActivityButton:hover {
-    background-color: white;
-    color: #ab171c;
-  }
-  
+.header {
+  position: sticky;
+  top: 0;
+  background-color: #f0f0f0;
+  padding: 20px;
+  z-index: 10;
+}
+
+.scrollableContainer {
+  max-height: calc(80vh - 80px);
+  overflow-y: auto;
+}
+
+.scrollableContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 200px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cardText {
+  flex-grow: 1;
+}
+
+.createActivityButton {
+  background-color: #ab171c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.createActivityButton:hover {
+  background-color: white;
+  color: #ab171c;
+}
