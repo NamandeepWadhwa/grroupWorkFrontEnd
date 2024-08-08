@@ -2,6 +2,7 @@ import {Row,Col} from 'react-bootstrap';
 import { formatDate } from '@/lib/DateFromat/askDateFormat';
 import Router from 'next/router';
 import { delteAnswer } from '@/lib/answer/deleteanser';
+import Avatar from './Avatar';
 
 export default function Answer({answer,user=false}) {
   const router=Router;
@@ -20,6 +21,7 @@ export default function Answer({answer,user=false}) {
  
     return (
        <Row className="border my-3 mx-1 rounded">
+        <Avatar id={answer.user} />
         <Col md={12} className="m-2">
         {answer.description}
         </Col>

@@ -4,6 +4,7 @@ import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import {deleteEvent} from "@/lib/evnet/deleteEvent";
 import { formatDate } from "@/lib/DateFromat/askDateFormat";
+import Avatar from "@/components/Avatar";
 export default function DisplayEvent({ event,ssf=false,reload}) {
   const router = Router;
   let pathname = `/events/${event._id}`;
@@ -28,6 +29,7 @@ export default function DisplayEvent({ event,ssf=false,reload}) {
   return (
     <>
       <Row className="border my-3 rounded  bg-white">
+        <Avatar id={event.user} />
         <Col className="m-2" md={12}>
           {event.title.substr(0, 100)}
         </Col>
