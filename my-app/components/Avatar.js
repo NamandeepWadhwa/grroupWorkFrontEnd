@@ -8,7 +8,7 @@ const Avatar = ({ id }) => {
   useEffect(() => {
     const token = gettingUser().token;
     const fetchData = async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/getUser`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKENDURL}/getUser/${id}`, {
         method: "GET",
         headers: {
           Authorization: `JWT ${token}`,
@@ -16,15 +16,17 @@ const Avatar = ({ id }) => {
       });
 
       const data = await res.json();
-      if(data.profile_picture.length>0)
+      if(data!=null){
+      if(data.profile_picture!=null  &&data.profile_picture.length>0 )
         {
       setImage(data.profile_picture);
       }
       
       setUserName(data.first_name);
+    }
     };
     fetchData();
-  }, [id]);
+  }, []);
   const [image, setImage] = useState("/userProfile.png");
   const [userName, setUserName] = useState("Unknown");
   return (

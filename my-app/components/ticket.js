@@ -9,7 +9,7 @@ export default function TicketResponse({ ticketResponse }) {
   
   return (
     <Row className="border my-3 mx-1 rounded">
-      <Avatar id={ticketResponse.user} />
+      <Avatar id={ticketResponse.responded_by} />
       <Col md={12} className="m-2">
         {ticketResponse.response}
       </Col>
