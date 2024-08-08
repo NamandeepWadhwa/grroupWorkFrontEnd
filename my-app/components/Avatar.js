@@ -22,7 +22,7 @@ const Avatar = ({ id }) => {
     };
     fetchData();
   }, [id]);
-  const [image, setImage] = useState("/backArrowQuestions.png");
+  const [image, setImage] = useState("/userProfile.png");
   const [userName, setUserName] = useState("Unknown");
   return (
     <div className="d-flex align-items-center my-2">
