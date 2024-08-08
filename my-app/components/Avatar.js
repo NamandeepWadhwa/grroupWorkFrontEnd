@@ -16,8 +16,11 @@ const Avatar = ({ id }) => {
       });
 
       const data = await res.json();
-      console.log(data);
+      if(data.profile_picture.length>0)
+        {
       setImage(data.profile_picture);
+      }
+      
       setUserName(data.first_name);
     };
     fetchData();
