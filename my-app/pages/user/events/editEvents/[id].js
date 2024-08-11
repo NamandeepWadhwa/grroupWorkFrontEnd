@@ -179,9 +179,14 @@ if(event === null){
           </div>
           <div>
             {categories.map((category, index) => (
-              <Badge key={index} bg="secondary" className="me-1">
+              <Button
+                key={index}
+                bg="secondary"
+                className="me-1"
+                onClick={() => handleRemoveCategory(category)}
+              >
                 {category} &times;
-              </Badge>
+              </Button>
             ))}
           </div>
         </Form.Group>
