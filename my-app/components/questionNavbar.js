@@ -77,9 +77,6 @@ export default function QuestionNavbar() {
                 <NavDropdown.Item onClick={UpVoteQuestions}>
                   UpVote
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={UpVoteQuestions}>
-                  UpVote
-                </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link className="m-2" href="/ticket">
                 Tickets
