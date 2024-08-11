@@ -1,6 +1,6 @@
 import {getEventByUser} from "@/lib/evnet/getEventyByUser";
 import { useEffect, useState } from "react";
-import styles from "@/styles/Question.module.css";
+import styles from "@/styles/QuesetionDisplay.module.css";
 import { Container } from "react-bootstrap";
 import DisplayEvent from "@/components/EventDisplay";
 import Link from "next/link";

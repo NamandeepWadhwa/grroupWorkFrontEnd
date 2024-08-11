@@ -11,6 +11,7 @@ import Router from "next/router";
 import { updateEvent } from "@/lib/evnet/upateEvent";
 import {getEventById} from "@/lib/evnet/getEventById";
 import { useEffect,useState } from "react";
+import styles from "@/styles/QuesetionDisplay.module.css";
 import Link from "next/link";
 
 const EditEventPage = () => {
@@ -124,7 +125,7 @@ if(event === null){
   return <h1>Loading</h1>
 }
   return (
-    <Container>
+    <Container className={styles.scrollable}>
       <Link href="/user/events" className="py-2">
         <Image
           src="/backArrowQuestions.png"

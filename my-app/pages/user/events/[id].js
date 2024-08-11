@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Container, Row, Col, Image, Badge } from "react-bootstrap";
 import Link from "next/link";
-import styles from "@/styles/Question.module.css";
+import styles from "@/styles/QuesetionDisplay.module.css";
 import { formatDate } from "@/lib/DateFromat/askDateFormat";
 import {getEventById} from "@/lib/evnet/getEventById";
 import { useEffect,useState } from "react";
