@@ -14,6 +14,7 @@ export default function BasicExample() {
   async function handleSubmit(e) {
     
     e.preventDefault();
+    // const emailRegex = /^[a-zA-Z0-9._%+-]+@myseneca\.ca$/i;
     const emailRegex2 = /^[a-zA-Z0-9._%+-]+@ssfinc\.ca$/i;
     var emailRegex = /^[a-zA-Z0-9._%+-]+@myseneca\.ca$/;
     if (email === "test@Student.com" || email === "test@Seneca.com") {
