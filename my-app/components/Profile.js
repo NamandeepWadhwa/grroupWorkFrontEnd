@@ -76,22 +76,7 @@ import React, { useState, useEffect } from 'react';
            ))
          )}
        </Card.Footer>
-       <Card.Footer>
-         <h5>Uploaded Posts</h5>
-         {profileData.posts.length === 0 ? (
-           <p>No uploaded posts yet.</p>
-         ) : (
-           profileData.posts.map((post) => (
-            <Link href={`/freeboard/${post._id}`}>
-             <Card key={post._id} className="mb-3">
-               <Card.Body>
-                 <Card.Title>{post.title}</Card.Title>
-               </Card.Body>
-             </Card>
-             </Link>
-           ))
-         )}
-       </Card.Footer>
+      
      </Card>
    );
  };
