@@ -67,12 +67,12 @@ export default function BasicExample() {
 
   return (
     <>
-    <Form className='m-5 p-5' onSubmit={handleSubmit}>
+    <Form className='m-2' onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Otp</Form.Label>
         <Form.Control  placeholder="OTP"  value={otp} onChange={(e) => setOtp(e.target.value)} />
         <Form.Text className="text-muted">
-      Enter the OTP sent to your email
+      Enter the OTP sent to your email (OPT is valid for 5 minutes)
         </Form.Text>
       </Form.Group>
 

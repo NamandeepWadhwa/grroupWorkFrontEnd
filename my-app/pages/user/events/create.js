@@ -5,6 +5,7 @@ import { createEvent } from "@/lib/evnet/createEvent";
 import Router from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "@/styles/QuesetionDisplay.module.css";
 
 const MyForm = () => {
   const role = gettingUser().role;
@@ -99,7 +100,7 @@ const MyForm = () => {
 
   if (role === "SSF Staff") {
     return (
-      <Container>
+      <Container className={styles.scrollable}>
         <Link href="/events">
           <Image
             src="/backArrowQuestions.png"

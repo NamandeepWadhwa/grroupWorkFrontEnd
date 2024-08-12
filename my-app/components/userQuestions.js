@@ -5,6 +5,7 @@ import { Row } from 'react-bootstrap';
 import {Col} from 'react-bootstrap';
 import {deleteQuestion } from "@/lib/question/deleteQuestion";
 import { formatDate } from '@/lib/DateFromat/askDateFormat';
+import Avatar from './Avatar';
 export default function UserQuestion({question}) {
   
   const router=Router;
@@ -21,6 +22,7 @@ export default function UserQuestion({question}) {
   return (
     <>
     <Row className="border m-3 rounded  bg-white">
+      <Avatar id={question.user} />
       <Col className="m-2" md={12}>
       {question.title.substr(0,100)}
       </Col>

@@ -21,7 +21,7 @@ export default function TicketNavBar({reload}) {
               Active
             </Nav.Link>
             <Nav.Link href="#" onClick={handleNotActiveTickets}>
-              Not Active
+              Closed
             </Nav.Link>
             <Nav>
               <Nav.Link href="/ticket/create">Create Tickets</Nav.Link>
