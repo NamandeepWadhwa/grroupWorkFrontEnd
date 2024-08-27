@@ -100,7 +100,13 @@ export default function SideBar(){
             }`}
           >
             <span className=" m-3 text-decoration-line: none">
-              <Link href="/" className="no-underline text-white">
+              <Link
+                href="/"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Home
               </Link>
             </span>
