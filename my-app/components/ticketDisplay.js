@@ -10,7 +10,7 @@ export default function TicketDisplay({ ticket }) {
 
   return (
     <>
-      <Row className="border my-3 rounded  bg-white">
+      <Row className="border-b my-3 rounded  bg-white">
         <Avatar id={ticket.user} />
         <Col className="m-2" md={12}>
           {ticket.title.substr(0, 100)}

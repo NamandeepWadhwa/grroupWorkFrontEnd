@@ -29,13 +29,14 @@ export default function Question() {
 
   return (
     <>
+  
       <QuestionNavbar />
       {questions.length === 0 ? (
         <h3 className="m-3">No questions found</h3>
       ) : (<>
       
       
-          <Container className={styles.scrollable}>
+          <Container>
             {questions.map((question) => (
               
                 

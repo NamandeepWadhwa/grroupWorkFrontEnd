@@ -63,7 +63,8 @@ export default function BasicExample() {
             body: JSON.stringify({ email }),
           }
         );
-        router.push("/user/otp");
+               router.push("/user/otp")
+  
       } catch (error) {
         console.error("An error occurred", error);
       }

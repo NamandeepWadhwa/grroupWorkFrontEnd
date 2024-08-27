@@ -36,7 +36,7 @@ const ActivityList = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <Container className={styles.container}>
+    <div className=" my-3 lg:m-0">
       <header className={styles.header}>
         <h1>Activities</h1>
         <Button as={Link} href="/activities/create" className={`mb-4 ${styles.createActivityButton}`}>Create New Activity</Button>
@@ -61,7 +61,7 @@ const ActivityList = () => {
           ))}
         </Row>
       </div>
-    </Container>
+    </div>
   );
 };
 

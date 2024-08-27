@@ -6,12 +6,10 @@ import SideBar from './SideBar';
 const Layout =(props) => {
 
     return (
-        <div className={styles.container}>
-            <SideBar />
-            <Container className={styles.main}>
-                {props.children}
-            </Container>
-        </div>
+      <>
+        <SideBar />
+        <div className='absolute top-24  w-full h-full lg:top-16'>{props.children}</div>
+      </>
     );
 };
 

@@ -30,8 +30,12 @@ const Avatar = ({ id }) => {
   const [image, setImage] = useState("/userProfile.png");
   const [userName, setUserName] = useState("Unknown");
   return (
-    <div className="d-flex align-items-center my-2">
-      <Image src={image} roundedCircle width={50} height={50} alt={userName} />
+    <div className="flex justify-start my-2">
+      <div className=" w-12 h-12 ">
+        <img src={image} className="object-cover rounded-full w-full h-full" />
+       
+      </div>
+
       <span className="ms-2">{userName}</span>
     </div>
   );

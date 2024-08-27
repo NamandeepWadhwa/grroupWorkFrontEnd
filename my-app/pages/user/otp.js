@@ -4,10 +4,10 @@ import { useAtom } from 'jotai';
 import { emailAtom } from '@/usserJotai/email';
 import { useState } from 'react';
 import { setToken, setEmailLocal, setRole } from '@/lib/storingUser';
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 
 export default function BasicExample() {
-  const router = Router;
+  const router = useRouter();
   const [otp, setOtp] = useState('');
   
   const [email, setEmail] = useAtom(emailAtom);
@@ -50,7 +50,7 @@ export default function BasicExample() {
         setRole(data2.role);
         localStorage.setItem('userId', data.user._id);
         if(data.exists) {
-          router.push('/');
+          window.location.href = '/';
         } else {
           router.push('/profile/create');
         }
