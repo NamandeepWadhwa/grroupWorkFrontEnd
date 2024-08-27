@@ -21,46 +21,61 @@ export default function UserQuestion({question}) {
   }
   return (
     <>
-    <Row className="border m-3 rounded  bg-white">
-      <Avatar id={question.user} />
-      <Col className="m-2" md={12}>
-      {question.title.substr(0,100)}
-      </Col>
-      <Col className="m-2" md={12}>
-      {question.description.substr(0,250)}
-      </Col>
-      <Col className="m-2" md={12}>
-      <Image src="/questionUpvote.png" width={20} height={20} alt="upvote image"></Image>
-      {" "+question.upVotesNumber}
-      </Col>
-      <Col className="m-2" md={12}>
-      {
-        "Posted on "+formatDate(question.created_at)
-      }</Col>
-      <Col className="m-2" md={12}>
+      <Row className="border-b m-2 rounded  bg-white">
+        <Avatar id={question.user} />
+        <Col className="m-2" md={12}>
+          {question.title.substr(0, 100)}
+        </Col>
+        <Col className="m-2" md={12}>
+          {question.description.substr(0, 250)}
+        </Col>
+        <Col className="m-2 flex" md={12}>
+          <Image
+            src="/questionUpvote.png"
+            width={20}
+            height={20}
+            alt="upvote image"
+          ></Image>
+          <span className="mx-2">{" " + question.upVotesNumber}</span>
+        </Col>
+        <Col className="m-2" md={12}>
+          {"Posted on " + formatDate(question.created_at)}
+        </Col>
+        <Col className="m-2" md={12}>
           <div>
             {question.tags.map((tag, index) => (
-              <Button
-                key={index}
-                variant="secondary"
-                className="me-2 mb-2"
-                
-              >
+              <Button key={index} variant="secondary" className="me-2 mb-2">
                 {tag}
               </Button>
             ))}
           </div>
         </Col>
-  
-      <Col className="m-2 " md={12}>
-      <Button variant="danger"  onClick={(e)=>{e.preventDefault();router.push(`../ask/${question._id}`)}} >View question</Button>
-      <Button variant="danger" className="m-2"  onClick={(e)=>{e.preventDefault();router.push(`./questions/${question._id}`)}} >Edit question</Button>
-      <Button variant="danger"className="m-2"   onClick={ handleDelete} >Delete question</Button>
-      </Col>
-    </Row>
-    
- 
- 
+
+        <Col className="m-2 " md={12}>
+          <Button
+            variant="danger"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push(`../ask/${question._id}`);
+            }}
+          >
+            View question
+          </Button>
+          <Button
+            variant="danger"
+            className="m-2"
+            onClick={(e) => {
+              e.preventDefault();
+              router.push(`./questions/${question._id}`);
+            }}
+          >
+            Edit question
+          </Button>
+          <Button variant="danger" className="m-2" onClick={handleDelete}>
+            Delete question
+          </Button>
+        </Col>
+      </Row>
     </>
   );
 

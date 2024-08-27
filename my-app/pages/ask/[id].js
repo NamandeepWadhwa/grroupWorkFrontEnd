@@ -70,50 +70,71 @@ export default function Page() {
     setAnswers(data);
   };
 
-  return( 
+  return (
     <Container className={`${styles.scrollable} bg-white`}>
       <Row className="my-2">
         <Col>
-           <Link href="/ask"><Image src="/backArrowQuestions.png" width={50} height={50} alt="back arrow image "></Image></Link> 
+          <Link href="/ask">
+            <Image
+              src="/backArrowQuestions.png"
+              width={50}
+              height={50}
+              alt="back arrow image "
+            ></Image>
+          </Link>
         </Col>
       </Row>
-        <Row className="my-3">
-            <Col >
-                <p><h3>Title: </h3>{question.title}</p>
-                <p><h3>Description</h3>{question.description}</p>
-                <Button variant="white" onClick={handleUpvote}><Image src={isUpvoted?"/questionUpvoted.png":"/questionUpvote.png"}  width={20} height={20} alt="like button"></Image> {upVote}</Button>
-            </Col>
-            </Row>
-           
-           
-            <Row>
-            <Col>
-            <Form onSubmit={handleAddAnswer}>
-              <Form.Group className="mb-3">
-                <Form.Label>Add a answer</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={2}
-                  value={newAnswer}
-                  onChange={(e) => setNewAnswer(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form></Col>
-        </Row>
-      
-          <h4>Answers:</h4>
-          {answers.length > 0 ? (
-            answers.map((answer, index) => (
-              <Answer key={index} answer={answer} />
-            ))
-          ) : (
-            <p>No answers yet.</p>
-          )}
-     
+      <Row className="my-3">
+        <Col className="flex flex-col">
+          <p>
+            <h3>Title: </h3>
+            {question.title}
+          </p>
+          <p>
+            <h3>Description</h3>
+            {question.description}
+          </p>
+          <div className="flex">
+            <Button variant="white" onClick={handleUpvote}>
+              <Image
+                src={isUpvoted ? "/questionUpvoted.png" : "/questionUpvote.png"}
+                width={20}
+                height={20}
+                alt="like button"
+              ></Image>{" "}
+             
+            </Button>
+            <span className="my-2 mx-1">{upVote}</span>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Form onSubmit={handleAddAnswer}>
+            <Form.Group className="mb-3">
+              <Form.Label>Add a answer</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={2}
+                value={newAnswer}
+                onChange={(e) => setNewAnswer(e.target.value)}
+                required
+              />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+
+      <h4>Answers:</h4>
+      {answers.length > 0 ? (
+        answers.map((answer, index) => <Answer key={index} answer={answer} />)
+      ) : (
+        <p>No answers yet.</p>
+      )}
     </Container>
-)
+  );
 }

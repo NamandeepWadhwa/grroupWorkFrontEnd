@@ -33,7 +33,7 @@ if (event == null) {
 }
   return (
     
-    <Container className={styles.scrollable}>
+    <Container className="lg:my-5">
       <Link href="/events">
         <Image
           src="/backArrowQuestions.png"
