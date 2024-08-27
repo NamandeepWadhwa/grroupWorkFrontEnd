@@ -77,7 +77,9 @@ export default function SideBar(){
           </div>
           <div className="m-3 text-white text-2xl hidden lg:block  right-0">
             <span>
-              <button onClick={handleUserSignInOut}>{isUser ? "Sign Out" : "Sign In"}</button>
+              <button onClick={handleUserSignInOut}>
+                {isUser ? "Sign Out" : "Sign In"}
+              </button>
             </span>
           </div>
           <div className="m-3 right-0 lg:hidden block">
@@ -103,27 +105,57 @@ export default function SideBar(){
               </Link>
             </span>
             <span className=" m-3 text-decoration-line: none">
-              <Link href="/events" className="no-underline text-white">
+              <Link
+                href="/events"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Events
               </Link>
             </span>
             <span className=" m3 text-decoration-line: none">
-              <Link href="/activities" className="no-underline text-white">
+              <Link
+                href="/activities"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Activities
               </Link>
             </span>
             <span className=" m-3 text-decoration-line: none">
-              <Link href="/ask" className="no-underline text-white">
+              <Link
+                href="/ask"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Ask
               </Link>
             </span>
             <span className=" m-3 text-decoration-line: none">
-              <Link href="/notification" className="no-underline text-white">
+              <Link
+                href="/notification"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Notification
               </Link>
             </span>
             <span className=" m-3 text-decoration-line: none">
-              <Link href="/profile" className="no-underline text-white">
+              <Link
+                href="/profile"
+                onClick={(e) => {
+                  setShowMenu(false);
+                }}
+                className="no-underline text-white"
+              >
                 Profile
               </Link>
             </span>
