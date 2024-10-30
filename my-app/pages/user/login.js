@@ -63,6 +63,11 @@ export default function BasicExample() {
             body: JSON.stringify({ email }),
           }
         );
+        if(response.status===401){
+          const data=await response.json();
+          alert(data.message)
+          return;
+        }
                router.push("/user/otp")
   
       } catch (error) {
