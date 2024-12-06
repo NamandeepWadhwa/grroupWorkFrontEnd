@@ -65,7 +65,8 @@ export default function BasicExample() {
         );
         if(response.status===401){
           const data=await response.json();
-          alert(data.message)
+          console.log(data);
+          alert(data.messsage)
           return;
         }
                router.push("/user/otp")
